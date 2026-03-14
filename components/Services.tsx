@@ -41,7 +41,7 @@ const SERVICES = [
     bg: 'rgb(252,206,240)',
     textColor: 'rgb(22,22,20)',
     descColor: 'rgb(59,59,59)',
-    img: 'https://framerusercontent.com/images/T1nJDQ6FGv3QidAJIjDXJJis2oU.svg',
+    img: '/T1nJDQ6FGv3QidAJIjDXJJis2oU.svg',
   },
   {
     id: 'branding',
@@ -50,7 +50,7 @@ const SERVICES = [
     bg: 'rgb(244,255,119)',
     textColor: 'rgb(22,22,20)',
     descColor: 'rgb(59,59,59)',
-    img: 'https://framerusercontent.com/images/TbwVAL3nmCoUvAkSi50PfLe4.svg',
+    img: '/TbwVAL3nmCoUvAkSi50PfLe4.svg',
   },
   {
     id: 'social',
@@ -59,7 +59,7 @@ const SERVICES = [
     bg: 'rgb(101,157,245)',
     textColor: 'rgb(255,255,255)',
     descColor: 'rgb(255,255,255)',
-    img: 'https://framerusercontent.com/images/Qi6rFCH6DfkbgZT3dhKF6Nc70YE.svg',
+    img: '/Qi6rFCH6DfkbgZT3dhKF6Nc70YE.svg',
   },
   {
     id: 'ppc',
@@ -68,7 +68,7 @@ const SERVICES = [
     bg: 'rgb(237,93,58)',
     textColor: 'rgb(255,255,255)',
     descColor: 'rgb(255,255,255)',
-    img: 'https://framerusercontent.com/images/TeUnJzUCJFy8uOZRGs6bPAcmbzo.svg',
+    img: '/D76fksoewqj1qpkY87NtVx2Y0RU.svg',
   },
 ]
 

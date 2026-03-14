@@ -94,7 +94,7 @@ export default function Hero() {
 
       {/* Halftone BG image */}
       <img
-        src="https://framerusercontent.com/images/AWMIgWK3TKYddF2nKX23L8sYM.png"
+        src="/AWMIgWK3TKYddF2nKX23L8sYM.png"
         alt=""
         style={{
           position: 'absolute',

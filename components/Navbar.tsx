@@ -46,7 +46,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/">
           <img
-            src="https://framerusercontent.com/images/ihTtbR2rDfjiVzSUaS37G4MPbms.svg"
+            src="/ihTtbR2rDfjiVzSUaS37G4MPbms.svg"
             alt="Zentra"
             width={133}
             height={39}

@@ -24,7 +24,7 @@ export const SERVICES = [
     desc:  'We craft customized marketing roadmaps that align with your goals — blending research, creativity.',
     bg:    'rgb(252, 206, 240)',
     textColor: 'rgb(22, 22, 20)',
-    img:   'https://framerusercontent.com/images/T1nJDQ6FGv3QidAJIjDXJJis2oU.svg',
+    img:   '/T1nJDQ6FGv3QidAJIjDXJJis2oU.svg',
     href:  '/services/seo-digital-strategy',
   },
   {
@@ -32,7 +32,7 @@ export const SERVICES = [
     desc:  "Brand identity that stands out. From logo to visual storytelling, we bring your brand's personality to life.",
     bg:    'rgb(244, 255, 119)',
     textColor: 'rgb(22, 22, 20)',
-    img:   'https://framerusercontent.com/images/TbwVAL3nmCoUvAkSi50PfLe4.svg',
+    img:   '/TbwVAL3nmCoUvAkSi50PfLe4.svg',
     href:  '/services/branding-creative-design',
   },
   {
@@ -40,7 +40,7 @@ export const SERVICES = [
     desc:  'Engage your audience and grow your community with strategic social media campaigns.',
     bg:    'rgb(101, 157, 245)',
     textColor: 'rgb(255, 255, 255)',
-    img:   'https://framerusercontent.com/images/Qi6rFCH6DfkbgZT3dhKF6Nc70YE.svg',
+    img:   '/Qi6rFCH6DfkbgZT3dhKF6Nc70YE.svg',
     href:  '/services/social-media-marketing',
   },
   {
@@ -48,7 +48,7 @@ export const SERVICES = [
     desc:  'Maximize ROI through targeted ad campaigns on Google, Meta, and beyond designed to boost visible growth.',
     bg:    'rgb(237, 93, 58)',
     textColor: 'rgb(255, 255, 255)',
-    img:   'https://framerusercontent.com/images/TeUnJzUCJFy8uOZRGs6bPAcmbzo.svg',
+    img:   '/D76fksoewqj1qpkY87NtVx2Y0RU.svg',
     href:  '/services/paid-advertising',
   },
 ]

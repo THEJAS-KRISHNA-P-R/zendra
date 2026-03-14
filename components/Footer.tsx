@@ -184,7 +184,7 @@ export default function Footer() {
               transition={{ type: 'spring', bounce: 0.2, delay: 0.2, duration: 2 }}
             >
               <img
-                src="https://framerusercontent.com/images/ntRe7dD4UgelSjpAkXh5nOlusAo.svg"
+                src="/ntRe7dD4UgelSjpAkXh5nOlusAo.svg"
                 alt="ZENTRA STUDIO"
                 style={{
                   width: '100%',
