@@ -10,7 +10,7 @@ function AnimatedText({ text, className, style }: { text: string; className?: st
   const words = text.split(' ')
 
   return (
-    <span ref={ref} className={className} style={{ ...style, display: 'inline-block', flexWrap: 'wrap' }}>
+    <span ref={ref} className={className} style={{ ...style, display: 'flex', flexWrap: 'wrap', justifyContent: 'inherit' }}>
       {words.map((word, wordIdx) => (
         <span key={wordIdx} style={{ display: 'inline-block', whiteSpace: 'nowrap', marginRight: wordIdx < words.length - 1 ? '0.3em' : 0 }}>
           {word.split('').map((char, i) => {
@@ -83,10 +83,10 @@ function Badge({
 export default function Hero() {
   return (
     <section
-      className="max-md:pt-[145px] max-md:px-[20px] max-md:pb-[50px] pt-[226px] px-[30px] pb-[80px] flex flex-col items-center gap-5 relative z-10"
+      className="w-full max-md:pt-[145px] max-md:px-[20px] max-md:pb-[50px] pt-[226px] px-[30px] pb-[80px] flex flex-col items-center gap-5 relative z-10"
       style={{
         backgroundColor: 'rgb(19,109,245)',
-        overflow: 'visible',
+        overflow: 'hidden',
       }}
     >
       {/* Dot texture overlay */}
@@ -144,7 +144,7 @@ export default function Hero() {
 
           {/* Main H1 — letter animation */}
           <h1 className="font-boldonse text-[34px] leading-[120%] tracking-normal md:text-[68px] md:leading-[130%] xl:text-[125px] xl:leading-[130%] uppercase text-white max-md:text-left text-center">
-            <AnimatedText text="MAKE YOUR BRAND MEMORABLE" className="max-w-[800px] md:max-w-none" />
+            <AnimatedText text="MAKE YOUR BRAND MEMORABLE" className="w-full md:max-w-none" />
           </h1>
         </div>
 
@@ -277,20 +277,18 @@ export default function Hero() {
 
           {/* 2. TWO CONCENTRIC THIN WHITE RINGS (Unified viewBox for perfect alignment) */}
           <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} viewBox="0 0 321.25 322.864">
-            {/* Outer ring - Centered at 160.6, 161.4 */}
-            <circle cx="160.625" cy="161.432" r="102" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="0.8" />
-            {/* Inner ring - Centered at 160.6, 161.4 */}
-            <circle cx="160.625" cy="161.432" r="72" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="0.8" />
+            {/* Outer ring - Centered at 160.6, 161.4 - Resized by 30% (102 -> 132.6) */}
+            <circle cx="160.625" cy="161.432" r="120.6" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="0.8" />
+            {/* Inner ring - Centered at 160.6, 161.4 - Resized by 30% (72 -> 93.6) */}
+            <circle cx="160.625" cy="161.432" r="85.6" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="0.8" />
           </svg>
 
           {/* 3. Central Starburst Icon - Pulsing Animation */}
           <motion.svg
-            width="36"
-            height="36"
+            width="90"
+            height="90"
             viewBox="0 0 88 88"
             style={{ position: 'absolute', zIndex: 1 }}
-            animate={{ scale: [0.95, 1.05, 0.95], opacity: [0.8, 1, 0.8] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
           >
             <path d="M 88 48 L 58.928 48 L 84.105 62.536 L 80.105 69.464 L 54.928 54.928 L 69.464 80.105 L 62.536 84.105 L 48 58.928 L 48 88 L 40 88 L 40 58.928 L 25.464 84.105 L 18.536 80.105 L 33.072 54.928 L 7.895 69.464 L 3.895 62.536 L 29.072 48 L 0 48 L 0 40 L 29.072 40 L 3.895 25.464 L 7.895 18.536 L 33.072 33.072 L 18.536 7.895 L 25.464 3.895 L 40 29.072 L 40 0 L 48 0 L 48 29.072 L 62.536 3.895 L 69.464 7.895 L 54.928 33.072 L 80.105 18.536 L 84.105 25.464 L 58.928 40 L 88 40 Z" fill="white" />
           </motion.svg>
@@ -303,20 +301,20 @@ export default function Hero() {
             transition={{ duration: 16, ease: 'linear', repeat: Infinity }}
           >
             <defs>
-              {/* Radius 87 sits perfectly between R=102 and R=72 circles */}
-              <path id="gear-text-path-final" d="M 160.625,161.432 m -87,0 a 87,87 0 1,1 174,0 a 87,87 0 1,1 -174,0" />
+              {/* Radius resized by 30% (87 -> 113.1) sits perfectly between R=132.6 and R=93.6 circles */}
+              <path id="gear-text-path-final" d="M 160.625,161.432 m -97.1,0 a 97.1,97.1 0 1,1 194.2,0 a 97.1,97.1 0 1,1 -194.2,0" />
             </defs>
             <text
               style={{
-                fontSize: '12px',
+                fontSize: '14.6px',
                 fontFamily: 'sans-serif',
                 fill: '#fff',
-                letterSpacing: 2.5,
+                letterSpacing: 2.2,
                 textTransform: 'uppercase'
               }}
             >
               <textPath href="#gear-text-path-final">
-                AWARD WINNER DIGITAL AGENCY • AWARD WINNER DIGITAL AGENCY •
+                AWARD WINNER DIGITAL AGENCY AWARD WINNER DIGITAL AGENCY
               </textPath>
             </text>
           </motion.svg>
@@ -324,7 +322,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Bottom shape scroller — blue shapes at section transition */}
-      <div className="absolute left-0 right-0 h-[250px] z-0 pointer-events-none" style={{ bottom: -36 }}>
+      <div className="absolute left-0 right-0 w-full h-[250px] z-0 pointer-events-none" style={{ bottom: -36 }}>
         <ShapeScroller color="rgb(19,109,245)" height={250} />
       </div>
 
