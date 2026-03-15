@@ -13,9 +13,9 @@ function AnimatedText({ text, style }: { text: string; style?: React.CSSProperti
         <motion.span
           key={i}
           style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : 'normal' }}
-          initial={{ opacity: 0.001, filter: 'blur(12px)', scale: 1.2 }}
-          animate={inView ? { opacity: 1, filter: 'blur(0px)', scale: 1 } : {}}
-          transition={{ delay: i * 0.04, duration: 0.5 }}
+          initial={{ opacity: 0.001, y: -20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: i * 0.01, duration: 0.3, ease: 'easeOut' }}
         >
           {char === ' ' ? '\u00A0' : char}
         </motion.span>

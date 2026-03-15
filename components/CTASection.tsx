@@ -13,9 +13,9 @@ function AnimatedText({ text, style }: { text: string; style?: React.CSSProperti
         <motion.span
           key={i}
           style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : 'normal' }}
-          initial={{ opacity: 0.001, filter: 'blur(12px)', scale: 1.2 }}
-          animate={inView ? { opacity: 1, filter: 'blur(0px)', scale: 1 } : {}}
-          transition={{ delay: i * 0.04, duration: 0.5 }}
+          initial={{ opacity: 0.001, y: -20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: i * 0.01, duration: 0.3, ease: 'easeOut' }}
         >
           {char === ' ' ? '\u00A0' : char}
         </motion.span>
@@ -40,33 +40,25 @@ export default function CTASection() {
     }}>
       <div style={{ width: '100%', maxWidth: 1360, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0, position: 'relative' }}>
 
-        {/* Decorative elements row */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          width: '88%',
-          position: 'absolute',
-          top: 92, left: '52%',
-          transform: 'translateX(-50%)',
-        }}>
-          {/* BRANDING badge */}
+        {/* Floating Badges */}
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
           <Badge
             label="BRANDING"
             bg="rgb(237,93,58)"
             color="#fff"
+            rotate={0}
             delay={0.2}
-            drag={false}
-            style={{ position: 'relative' }}
+            shape="flatPill"
+            style={{ position: 'absolute', top: '30%', left: '10%', pointerEvents: 'auto' }}
           />
-          {/* MARKETING badge */}
           <Badge
             label="MARKETING"
             bg="rgb(55,182,105)"
             color="#fff"
+            rotate={0}
             delay={0.3}
-            drag={false}
-            style={{ position: 'relative' }}
+            shape="flatPill"
+            style={{ position: 'absolute', top: '30%', right: '8%', pointerEvents: 'auto' }}
           />
         </div>
 
@@ -85,17 +77,28 @@ export default function CTASection() {
           <h2 className="font-boldonse" style={{
             fontSize: 'clamp(26px,5.5vw,80px)',
             textTransform: 'uppercase',
-            letterSpacing: 'clamp(-1px,-0.3vw,-4px)',
+            letterSpacing: 'clamp(-3px,-0.3vw,-4px)',
             color: 'rgb(22,22,20)',
             maxWidth: 991,
           }}>
-            <AnimatedText text="Let's Grow Brand Together" />
+            <AnimatedText text="Let's Grow Brand" />
           </h2>
+          <h2 className="font-boldonse" style={{
+            fontSize: 'clamp(26px,5.5vw,80px)',
+            textTransform: 'uppercase',
+            letterSpacing: 'clamp(-3px,-0.3vw,-4px)',
+            color: 'rgb(22,22,20)',
+            maxWidth: 991,
+            lineHeight: '110%',
+          }}>
+            <AnimatedText text="Together" />
+          </h2>
+
         </div>
 
         {/* CTA button (pink — exact from DOM: framer-1nnaf6a) */}
         <motion.div
-          style={{ marginTop: 40, position: 'relative' }}
+          style={{ position: 'relative' }}
           initial={{ opacity: 0.001, y: 800 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ type: 'spring', bounce: 0.2, delay: 0.2, duration: 2 }}
@@ -103,7 +106,7 @@ export default function CTASection() {
           <a href="#" style={{
             background: 'rgb(252,206,240)',
             borderRadius: 100,
-            padding: '20px 30px',
+            padding: '30px 30px',
             fontFamily: '"Boldonse",sans-serif',
             fontSize: 20,
             color: 'rgb(22,22,20)',
@@ -117,15 +120,7 @@ export default function CTASection() {
         </motion.div>
 
         {/* Asterisk */}
-        <div style={{
-          position: 'absolute',
-          top: '50%', left: '50%',
-          transform: 'translate(-50%,-50%)',
-          fontSize: 24, color: 'rgb(22,22,20)',
-          opacity: 0.5,
-        }}>
-          ✳
-        </div>
+
       </div>
     </section>
   )

@@ -13,9 +13,9 @@ function AnimatedText({ text, style }: { text: string; style?: React.CSSProperti
         <motion.span
           key={i}
           style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : 'normal' }}
-          initial={{ opacity: 0.001, filter: 'blur(10px)', y: 10 }}
-          animate={inView ? { opacity: 1, filter: 'blur(0px)', y: 0 } : {}}
-          transition={{ delay: i * 0.04, duration: 0.5 }}
+          initial={{ opacity: 0.001, y: -20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: i * 0.01, duration: 0.3, ease: 'easeOut' }}
         >
           {char === ' ' ? '\u00A0' : char}
         </motion.span>
@@ -60,7 +60,7 @@ function FAQItem({ item, index, open, onToggle }: {
       style={{
         background: 'rgb(251,248,233)',
         borderRadius: 26,
-        padding: open ? '30px 20px' : '25px 20px 30px',
+        padding: open ? '50px 50px' : '50px 50px 50px',
         cursor: 'pointer',
         overflow: 'hidden',
         display: 'flex',
@@ -68,9 +68,9 @@ function FAQItem({ item, index, open, onToggle }: {
         alignItems: 'flex-start',
         justifyContent: 'space-between',
       }}
-      initial={{ opacity: 0.001, filter: 'blur(10px)', y: 60 }}
-      animate={inView ? { opacity: 1, filter: 'blur(0px)', y: 0 } : {}}
-      transition={{ delay: index * 0.05, duration: 0.5 }}
+      initial={{ opacity: 0.001, y: -30 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ delay: index * 0.1, duration: 0.5, ease: 'easeOut' }}
     >
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 24 }}>
         <p className="font-boldonse" style={{
@@ -106,8 +106,8 @@ function FAQItem({ item, index, open, onToggle }: {
         <div style={{ position: 'absolute', width: 40, height: 5, background: 'rgb(22,22,20)', borderRadius: 2 }} />
         <motion.div
           style={{ position: 'absolute', width: 40, height: 5, background: 'rgb(22,22,20)', borderRadius: 2 }}
-          animate={{ rotate: open ? -90 : 90 }}
-          transition={{ duration: 0.2 }}
+          animate={{ rotate: open ? 180 : 90 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
         />
       </div>
     </motion.div>
@@ -136,14 +136,14 @@ export default function FAQ() {
           {/* Title with Badge */}
           <div ref={titleRef} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 30, textAlign: 'center' }}>
             {/* FAQ badge — Scalloped shape */}
-            <Badge
-              label="BLOGS"
-              bg="rgb(237,93,58)"
+            <Badge 
+              label="FAQ"
+              bg="rgb(19,109,245)"
               color="#fff"
-              rotate={12}
+              rotate={-12}
               delay={0.2}
               shape="strategy"
-              style={{ position: 'relative', top: 200, left: 400 }}
+              style={{ position: 'relative', top: 0, left: -60 }}
             />
             <h2 className="font-boldonse" style={{
               fontSize: 'clamp(26px,5vw,85px)',
