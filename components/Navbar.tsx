@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Navbar() {
@@ -66,7 +67,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between w-full">
             {/* Logo */}
             <Link href="/" onClick={() => setMobileOpen(false)}>
-              <img
+              <Image
                 src="/ihTtbR2rDfjiVzSUaS37G4MPbms.svg"
                 alt="Zentra"
                 width={133}

@@ -3,6 +3,8 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import ShapeScroller from './ShapeScroller'
 import Badge from './Badge'
+import Link from 'next/link'
+import Image from 'next/image'
 
 function AnimatedText({ text, style }: { text: string; style?: React.CSSProperties }) {
   const ref = useRef<HTMLSpanElement>(null)
@@ -13,12 +15,12 @@ function AnimatedText({ text, style }: { text: string; style?: React.CSSProperti
   return (
     <span ref={ref} style={{ ...style, display: 'inline-block', flexWrap: 'wrap' }}>
       {words.map((word, wordIdx) => (
-        <span key={wordIdx} style={{ display: 'inline-block', whiteSpace: 'nowrap', marginRight: wordIdx < words.length - 1 ? '0.3em' : 0 }}>
+        <span key={`${word}-${wordIdx}`} style={{ display: 'inline-block', whiteSpace: 'nowrap', marginRight: wordIdx < words.length - 1 ? '0.3em' : 0 }}>
           {word.split('').map((char, i) => {
             const charIdx = wordIdx * 10 + i;
             return (
               <motion.span
-                key={i}
+                key={`${char}-${i}`}
                 style={{ display: 'inline-block' }}
                 initial={{ opacity: 0.001, filter: 'blur(12px)', scale: 1.2 }}
                 animate={inView ? { opacity: 1, filter: 'blur(0px)', scale: 1 } : {}}
@@ -76,76 +78,90 @@ function WorkCard({ work, delay = 0 }: { work: typeof WORKS[0]; delay?: number }
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <motion.a
-      ref={ref as any}
+    <Link
       href="#"
-      style={{
-        background: work.bg,
-        border: 'none',
-        boxShadow: 'none',
-        borderRadius: 'clamp(24px, 4vw, 56px)',
-        padding: 'clamp(16px, 2.5vw, 32px)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 24,
-        textDecoration: 'none',
-        overflow: 'hidden',
-        minWidth: 0,
-      }}
-      initial={{ opacity: 0, y: 100, scale: 0.8 }}
-      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-      transition={{ type: 'spring', bounce: 0.2, delay, duration: 1.5 }}
+      passHref
+      style={{ textDecoration: 'none', minWidth: 0 }}
     >
-      {/* Image */}
-      <div style={{ borderRadius: 'clamp(20px, 3vw, 36px)', overflow: 'hidden', aspectRatio: '1.32' }}>
-        <motion.img
-          src={work.img}
-          alt={work.name}
-          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-          initial={{ scale: 1.2, filter: 'grayscale(0)', rotate: 0 }}
-          animate={inView ? { scale: 1 } : {}}
-          transition={{ duration: 1.2 }}
-          whileHover={{
-            scale: 1.4, // Increased zoom for more "pop"
-            rotate: 6,
-            filter: 'grayscale(1)',
-            transition: { duration: 0.45, ease: "circOut" } // Slightly faster for snap
-          }}
-        />
-      </div>
-      {/* Card content */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-        <div>
-          <h4 className="font-boldonse" style={{
-            fontSize: 'clamp(16px,1.6vw,22px)',
-            textTransform: 'uppercase',
-            color: work.light ? '#fff' : 'rgb(22,22,20)',
-            paddingTop: 10,
-          }}>
-            {work.name}
-          </h4>
+      <motion.div
+        ref={ref}
+        style={{
+          background: work.bg,
+          border: 'none',
+          boxShadow: 'none',
+          borderRadius: 'clamp(24px, 4vw, 56px)',
+          padding: 'clamp(16px, 2.5vw, 32px)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 24,
+          overflow: 'hidden',
+          minWidth: 0,
+        }}
+        initial={{ opacity: 0, y: 100, scale: 0.8 }}
+        animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+        transition={{ type: 'spring', bounce: 0.2, delay, duration: 1.5 }}
+        whileHover="hover"
+      >
+        {/* Image */}
+        <div style={{ borderRadius: 'clamp(20px, 3vw, 36px)', overflow: 'hidden', aspectRatio: '1.32', position: 'relative' }}>
+          <motion.div
+            style={{ width: '100%', height: '100%' }}
+            variants={{
+              initial: { scale: 1.2, filter: 'grayscale(0)', rotate: 0 },
+              animate: { scale: 1 },
+              hover: {
+                scale: 1.4,
+                rotate: 6,
+                filter: 'grayscale(1)',
+                transition: { duration: 0.45, ease: "circOut" }
+              }
+            }}
+            initial="initial"
+            animate={inView ? "animate" : "initial"}
+            transition={{ duration: 1.2 }}
+          >
+            <Image
+              src={work.img}
+              alt={work.name}
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </motion.div>
+        </div>
+        {/* Card content */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+          <div>
+            <h4 className="font-boldonse" style={{
+              fontSize: 'clamp(16px,1.6vw,22px)',
+              textTransform: 'uppercase',
+              color: work.light ? '#fff' : 'rgb(22,22,20)',
+              paddingTop: 10,
+            }}>
+              {work.name}
+            </h4>
+            <p style={{
+              fontFamily: '"Clash Grotesk",sans-serif',
+              fontWeight: 500,
+              fontSize: 'clamp(15px,1.4vw,20px)',
+              color: work.light ? '#fff' : 'rgb(59,59,59)',
+              lineHeight: '140%',
+              paddingTop: 10,
+            }}>
+              {work.cat}
+            </p>
+          </div>
           <p style={{
             fontFamily: '"Clash Grotesk",sans-serif',
             fontWeight: 500,
-            fontSize: 'clamp(15px,1.4vw,20px)',
+            fontSize: 20,
             color: work.light ? '#fff' : 'rgb(59,59,59)',
             lineHeight: '140%',
-            paddingTop: 10,
           }}>
-            {work.cat}
+            {work.year}
           </p>
         </div>
-        <p style={{
-          fontFamily: '"Clash Grotesk",sans-serif',
-          fontWeight: 500,
-          fontSize: 20,
-          color: work.light ? '#fff' : 'rgb(59,59,59)',
-          lineHeight: '140%',
-        }}>
-          {work.year}
-        </p>
-      </div>
-    </motion.a>
+      </motion.div>
+    </Link>
   )
 }
 
@@ -211,7 +227,7 @@ export default function Portfolio() {
             width: '100%'
           }}>
             {WORKS.map((work, idx) => (
-              <WorkCard key={idx} work={work as any} delay={idx * 0.1} />
+              <WorkCard key={work.name} work={work} delay={idx * 0.1} />
             ))}
           </div>
         </div>

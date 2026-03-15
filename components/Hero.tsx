@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react'
 import { motion, useAnimation, useInView, useScroll, useTransform } from 'framer-motion'
 import ShapeScroller from './ShapeScroller'
 import Badge from './Badge'
+import Image from 'next/image'
 
 function AnimatedText({ text, className, style, delay = 0 }: { text: string; className?: string; style?: React.CSSProperties; delay?: number }) {
   const ref = useRef<HTMLSpanElement>(null)
@@ -13,13 +14,13 @@ function AnimatedText({ text, className, style, delay = 0 }: { text: string; cla
   return (
     <span ref={ref} className={className} style={{ ...style, display: 'flex', flexWrap: 'wrap', justifyContent: 'inherit' }}>
       {words.map((word, wordIdx) => (
-        <span key={wordIdx} style={{ display: 'inline-block', whiteSpace: 'nowrap', marginRight: wordIdx < words.length - 1 ? '0.3em' : 0 }}>
+        <span key={`${word}-${wordIdx}`} style={{ display: 'inline-block', whiteSpace: 'nowrap', marginRight: wordIdx < words.length - 1 ? '0.3em' : 0 }}>
           {word.split('').map((char, i) => {
             // Sequential index for all characters in the string
             const charIdx = text.substring(0, text.indexOf(word) + i).length;
             return (
               <motion.span
-                key={i}
+                key={`${char}-${i}`}
                 style={{ display: 'inline-block', willChange: 'transform' }}
                 initial={{ opacity: 0, y: 20, filter: 'blur(12px)' }}
                 animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
@@ -66,19 +67,24 @@ export default function Hero() {
       }}
     >
       {/* Halftone BG image */}
-      <img
-        src="/AWMIgWK3TKYddF2nKX23L8sYM.png"
-        alt=""
-        style={{
+      <div style={{
           position: 'absolute',
           top: 'calc(20% - 20px)', left: '50%',
           transform: 'translateX(-50%)',
           width: '94%', maxWidth: 1273,
+          aspectRatio: '1273 / 682', // Approximate ratio based on image dimensions if known
           opacity: 0.6,
           zIndex: 0,
           pointerEvents: 'none',
-        }}
-      />
+      }}>
+        <Image
+          src="/AWMIgWK3TKYddF2nKX23L8sYM.png"
+          alt=""
+          fill
+          priority
+          style={{ objectFit: 'contain' }}
+        />
+      </div>
 
       {/* Container */}
       <div className="relative z-[2] w-full max-w-[1360px] flex flex-col items-center gap-[230px] max-md:items-start max-md:gap-[40px]">
@@ -209,11 +215,13 @@ export default function Hero() {
         transition={{ type: 'spring', bounce: 0.2, delay: 0.3, duration: 2 }}
       >
         {/* Actual robot SVG character image */}
-        <div style={{ width: '100%', aspectRatio: '0.953' }}>
-          <img
+        <div style={{ width: '100%', aspectRatio: '0.953', position: 'relative' }}>
+          <Image
             src="/zrobo1.svg"
             alt="Character"
-            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            fill
+            priority
+            style={{ objectFit: 'contain' }}
           />
         </div>
       </motion.div>

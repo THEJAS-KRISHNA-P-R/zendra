@@ -4,4 +4,4 @@ const nextConfig = {
     domains: ['framerusercontent.com'],
   },
 }
-module.exports = nextConfig
+export default nextConfig

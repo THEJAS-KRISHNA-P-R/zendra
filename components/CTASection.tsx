@@ -3,6 +3,7 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import ShapeScroller from './ShapeScroller'
 import Badge from './Badge'
+import Link from 'next/link'
 
 function AnimatedText({ text, style }: { text: string; style?: React.CSSProperties }) {
   const ref = useRef<HTMLSpanElement>(null)
@@ -11,7 +12,7 @@ function AnimatedText({ text, style }: { text: string; style?: React.CSSProperti
     <span ref={ref} style={{ ...style, display: 'inline' }}>
       {text.split('').map((char, i) => (
         <motion.span
-          key={i}
+          key={`${char}-${i}`}
           style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : 'normal' }}
           initial={{ opacity: 0.001, y: -20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -103,7 +104,7 @@ export default function CTASection() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ type: 'spring', bounce: 0.2, delay: 0.2, duration: 2 }}
         >
-          <a href="#" style={{
+          <Link href="#" style={{
             background: 'rgb(252,206,240)',
             borderRadius: 100,
             padding: '30px 30px',
@@ -116,7 +117,7 @@ export default function CTASection() {
             textDecoration: 'none',
           }}>
             Get Started →
-          </a>
+          </Link>
         </motion.div>
 
         {/* Asterisk */}

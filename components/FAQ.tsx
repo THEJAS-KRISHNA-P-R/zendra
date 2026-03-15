@@ -11,7 +11,7 @@ function AnimatedText({ text, style }: { text: string; style?: React.CSSProperti
     <span ref={ref} style={{ ...style, display: 'inline' }}>
       {text.split('').map((char, i) => (
         <motion.span
-          key={i}
+          key={`${char}-${i}`}
           style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : 'normal' }}
           initial={{ opacity: 0.001, y: -20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -118,7 +118,6 @@ function FAQItem({ item, index, open, onToggle }: {
 export default function FAQ() {
   const [openIdx, setOpenIdx] = useState(0)
   const titleRef = useRef<HTMLDivElement>(null)
-  const titleInView = useInView(titleRef, { once: true })
 
   return (
     <section style={{
@@ -163,7 +162,7 @@ export default function FAQ() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: '100%', maxWidth: 880, margin: '0 auto', paddingBottom: 5 }}>
             {FAQS.map((item, i) => (
               <FAQItem
-                key={i}
+                key={`${item.q}-${i}`}
                 item={item}
                 index={i}
                 open={openIdx === i}

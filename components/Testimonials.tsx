@@ -3,6 +3,7 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import ShapeScroller from './ShapeScroller'
 import Badge from './Badge'
+import Image from 'next/image'
 
 function AnimatedText({ text, style }: { text: string; style?: React.CSSProperties }) {
   const ref = useRef<HTMLSpanElement>(null)
@@ -13,12 +14,12 @@ function AnimatedText({ text, style }: { text: string; style?: React.CSSProperti
   return (
     <span ref={ref} style={{ ...style, display: 'inline-block', flexWrap: 'wrap' }}>
       {words.map((word, wordIdx) => (
-        <span key={wordIdx} style={{ display: 'inline-block', whiteSpace: 'nowrap', marginRight: wordIdx < words.length - 1 ? '0.3em' : 0 }}>
+        <span key={`${word}-${wordIdx}`} style={{ display: 'inline-block', whiteSpace: 'nowrap', marginRight: wordIdx < words.length - 1 ? '0.3em' : 0 }}>
           {word.split('').map((char, i) => {
             const charIdx = wordIdx * 10 + i;
             return (
               <motion.span
-                key={i}
+                key={`${char}-${i}`}
                 style={{ display: 'inline-block' }}
                 initial={{ opacity: 0.001, filter: 'blur(12px)', scale: 1.2 }}
                 animate={inView ? { opacity: 1, filter: 'blur(0px)', scale: 1 } : {}}
@@ -112,7 +113,14 @@ function TestiCard({ t, delay = 0 }: { t: typeof TESTIMONIALS[0]; delay?: number
 
       {/* Profile row */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-        <img src={t.img} alt={t.name} style={{ width: 80, height: 80, borderRadius: '50%', objectFit: 'cover' }} />
+        <div style={{ width: 80, height: 80, borderRadius: '50%', overflow: 'hidden', position: 'relative' }}>
+          <Image
+            src={t.img}
+            alt={t.name}
+            fill
+            style={{ objectFit: 'cover' }}
+          />
+        </div>
         <div>
           <p className="font-boldonse" style={{ fontSize: 16, color: 'rgb(22,22,20)', textTransform: 'uppercase' }}>
             {t.name}
@@ -140,7 +148,6 @@ function TestiCard({ t, delay = 0 }: { t: typeof TESTIMONIALS[0]; delay?: number
 
 export default function Testimonials() {
   const titleRef = useRef<HTMLDivElement>(null)
-  const titleInView = useInView(titleRef, { once: true })
 
   return (
     <section style={{

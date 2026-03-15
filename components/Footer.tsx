@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import ShapeScroller from './ShapeScroller'
 
 // ── CSS token values extracted from Framer source ────────────────
@@ -341,8 +342,8 @@ export default function Footer() {
           <div className="footer-wordmark-wrapper" style={{ position: 'relative', width: '100%', lineHeight: 0, padding: '0 60px', boxSizing: 'border-box' }}>
 
             {/* framer-1r7y6wt-container: ZENTRA STUDIO wordmark — no padding, flush width */}
-            <a href="/" style={{ display: 'block', lineHeight: 0, fontSize: 0 }}>
-              <img
+            <Link href="/" style={{ display: 'block', lineHeight: 0, fontSize: 0 }}>
+              <Image
                 src="/ntRe7dD4UgelSjpAkXh5nOlusAo.svg"
                 alt="Zentra Studio"
                 width={1360}
@@ -357,7 +358,7 @@ export default function Footer() {
                   padding: 0,
                 }}
               />
-            </a>
+            </Link>
 
             {/* Floating footer badges — hidden on mobile */}
             <div className="footer-float-badges">

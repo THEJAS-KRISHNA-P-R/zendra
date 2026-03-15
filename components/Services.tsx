@@ -3,37 +3,9 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import ShapeScroller from './ShapeScroller'
 import Badge from './Badge'
+import Link from 'next/link'
+import Image from 'next/image'
 
-function AnimatedText({ text, style }: { text: string; style?: React.CSSProperties }) {
-  const ref = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-
-  // Split by words, then by characters to allow word wrapping
-  const words = text.split(' ')
-
-  return (
-    <span ref={ref} style={{ ...style, display: 'flex', flexWrap: 'wrap' }}>
-      {words.map((word, wordIdx) => (
-        <span key={wordIdx} style={{ display: 'inline-block', whiteSpace: 'nowrap', marginRight: wordIdx < words.length - 1 ? '0.3em' : 0 }}>
-          {word.split('').map((char, i) => {
-            const charIdx = wordIdx * 10 + i; // rough index for stagger
-            return (
-              <motion.span
-                key={i}
-                style={{ display: 'inline-block' }}
-                initial={{ opacity: 0.001, filter: 'blur(12px)', scale: 1.2 }}
-                animate={inView ? { opacity: 1, filter: 'blur(0px)', scale: 1 } : {}}
-                transition={{ delay: charIdx * 0.04, duration: 0.5 }}
-              >
-                {char}
-              </motion.span>
-            )
-          })}
-        </span>
-      ))}
-    </span>
-  )
-}
 
 const SERVICES = [
   {
@@ -88,7 +60,6 @@ const SERVICES = [
 
 export default function Services() {
   const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
     <section ref={ref} className="services-section" style={{
@@ -193,98 +164,108 @@ export default function Services() {
           rowGap: 24,
         }}>
           {SERVICES.map((svc, idx) => (
-            <motion.a
+            <Link
               key={svc.id}
               href="#"
+              passHref
               style={{
-                background: svc.bg,
-                border: 'none',
-                borderRadius: 'clamp(24px, 4vw, 56px)',
-                padding: 'clamp(24px, 3.5vw, 50px) clamp(20px, 3vw, 40px)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
                 textDecoration: 'none',
-                position: 'relative',
-                overflow: 'hidden',
-                cursor: 'pointer',
                 gridColumn: svc.col,
                 gridRow: svc.row,
-                minHeight: 'clamp(260px, 35vw, 400px)',
               }}
-              variants={{
-                initial: { opacity: 0, y: 90, scale: 0.9 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  scale: 1,
-                  transition: {
-                    duration: 0.4,
-                    ease: "easeInOut",
-                    scale: { type: 'spring', bounce: 0.2, delay: 0.1 * idx, duration: 1.5 },
-                    y: { type: 'spring', bounce: 0.2, delay: 0.1 * idx, duration: 1.5 },
-                    opacity: { duration: 0.5, delay: 0.1 * idx }
-                  }
-                },
-                hover: {
-                  backgroundColor: svc.hoverBg,
-                  transition: { duration: 0.4, ease: "easeInOut" }
-                }
-              }}
-              initial="initial"
-              whileInView="visible"
-              whileHover="hover"
-              viewport={{ once: true, margin: '-10% 0px' }}
             >
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 20, zIndex: 1, maxWidth: 450 }}>
-                <h2 className="font-boldonse" style={{
-                  fontSize: 'clamp(20px,2.2vw,30px)',
-                  lineHeight: '180%',
-                  textTransform: 'uppercase',
-                  color: svc.textColor,
-                  letterSpacing: '0px',
-                }}>
-                  {svc.title}
-                </h2>
-                <p style={{
-                  fontFamily: '"Clash Grotesk",sans-serif',
-                  fontWeight: 500,
-                  fontSize: 'clamp(16px,1.4vw,22px)',
-                  color: svc.descColor,
-                  lineHeight: '150%',
-                  maxWidth: '90%',
-                }}>
-                  {svc.desc}
-                </p>
-              </div>
               <motion.div
+                style={{
+                  background: svc.bg,
+                  border: 'none',
+                  borderRadius: 'clamp(24px, 4vw, 56px)',
+                  padding: 'clamp(24px, 3.5vw, 50px) clamp(20px, 3vw, 40px)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  cursor: 'pointer',
+                  minHeight: 'clamp(260px, 35vw, 400px)',
+                }}
                 variants={{
-                  initial: { x: 0 },
+                  initial: { opacity: 0, y: 90, scale: 0.9 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    transition: {
+                      duration: 0.4,
+                      ease: "easeInOut",
+                      scale: { type: 'spring', bounce: 0.2, delay: 0.1 * idx, duration: 1.5 },
+                      y: { type: 'spring', bounce: 0.2, delay: 0.1 * idx, duration: 1.5 },
+                      opacity: { duration: 0.5, delay: 0.1 * idx }
+                    }
+                  },
                   hover: {
-                    x: -30,
+                    backgroundColor: svc.hoverBg,
                     transition: { duration: 0.4, ease: "easeInOut" }
                   }
                 }}
-                style={{
-                  position: 'absolute',
-                  bottom: -60,
-                  right: -10,
-                  width: '45%',
-                  height: '45%',
-                  zIndex: 0,
-                  display: 'flex',
-                  alignItems: 'flex-end',
-                  justifyContent: 'flex-end',
-                  pointerEvents: 'none',
-                }}
+                initial="initial"
+                whileInView="visible"
+                whileHover="hover"
+                viewport={{ once: true, margin: '-10% 0px' }}
               >
-                <img
-                  src={svc.img}
-                  alt={svc.title}
-                  style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 20, zIndex: 1, maxWidth: 450 }}>
+                  <h2 className="font-boldonse" style={{
+                    fontSize: 'clamp(20px,2.2vw,30px)',
+                    lineHeight: '180%',
+                    textTransform: 'uppercase',
+                    color: svc.textColor,
+                    letterSpacing: '0px',
+                  }}>
+                    {svc.title}
+                  </h2>
+                  <p style={{
+                    fontFamily: '"Clash Grotesk",sans-serif',
+                    fontWeight: 500,
+                    fontSize: 'clamp(16px,1.4vw,22px)',
+                    color: svc.descColor,
+                    lineHeight: '150%',
+                    maxWidth: '90%',
+                  }}>
+                    {svc.desc}
+                  </p>
+                </div>
+
+                <motion.div
+                  variants={{
+                    initial: { x: 0 },
+                    hover: {
+                      x: -30,
+                      transition: { duration: 0.4, ease: "easeInOut" }
+                    }
+                  }}
+                  style={{
+                    position: 'absolute',
+                    bottom: -60,
+                    right: -10,
+                    width: '45%',
+                    height: '45%',
+                    zIndex: 0,
+                    display: 'flex',
+                    alignItems: 'flex-end',
+                    justifyContent: 'flex-end',
+                    pointerEvents: 'none',
+                  }}
+                >
+                  <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                    <Image
+                      src={svc.img}
+                      alt={svc.title}
+                      fill
+                      style={{ objectFit: 'contain' }}
+                    />
+                  </div>
+                </motion.div>
               </motion.div>
-            </motion.a>
+            </Link>
           ))}
         </div>
 

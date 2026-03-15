@@ -3,6 +3,7 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import ShapeScroller from './ShapeScroller'
 import Badge from './Badge'
+import Image from 'next/image'
 
 function AnimatedText({ text, style }: { text: string; style?: React.CSSProperties }) {
   const ref = useRef<HTMLSpanElement>(null)
@@ -13,12 +14,12 @@ function AnimatedText({ text, style }: { text: string; style?: React.CSSProperti
   return (
     <span ref={ref} style={{ ...style, display: 'inline-block', flexWrap: 'wrap' }}>
       {words.map((word, wordIdx) => (
-        <span key={wordIdx} style={{ display: 'inline-block', whiteSpace: 'nowrap', marginRight: wordIdx < words.length - 1 ? '0.3em' : 0 }}>
+        <span key={`${word}-${wordIdx}`} style={{ display: 'inline-block', whiteSpace: 'nowrap', marginRight: wordIdx < words.length - 1 ? '0.3em' : 0 }}>
           {word.split('').map((char, i) => {
             const charIdx = wordIdx * 10 + i;
             return (
               <motion.span
-                key={i}
+                key={`${char}-${i}`}
                 style={{ display: 'inline-block' }}
                 initial={{ opacity: 0.001, filter: 'blur(12px)', scale: 1.2 }}
                 animate={inView ? { opacity: 1, filter: 'blur(0px)', scale: 1 } : {}}
@@ -68,15 +69,16 @@ function TeamCard({ member, delay = 0 }: { member: typeof TEAM[0]; delay?: numbe
     >
       {/* Photo */}
       <motion.div
-        style={{ borderRadius: 'clamp(20px, 3vw, 36px)', overflow: 'hidden', aspectRatio: '1' }}
+        style={{ borderRadius: 'clamp(20px, 3vw, 36px)', overflow: 'hidden', aspectRatio: '1', position: 'relative' }}
         initial={{ opacity: 0, y: 60, scale: 0.7 }}
         animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
         transition={{ type: 'spring', bounce: 0.2, delay: delay + 0.1, duration: 1.5 }}
       >
-        <motion.img
+        <Image
           src={member.img}
           alt={member.name}
-          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          fill
+          style={{ objectFit: 'cover' }}
         />
       </motion.div>
       {/* Info */}
@@ -104,7 +106,6 @@ function TeamCard({ member, delay = 0 }: { member: typeof TEAM[0]; delay?: numbe
 
 export default function Team() {
   const titleRef = useRef<HTMLDivElement>(null)
-  const titleInView = useInView(titleRef, { once: true })
 
   return (
     <section className="team-section" style={{

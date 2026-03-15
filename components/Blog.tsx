@@ -3,6 +3,8 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import ShapeScroller from './ShapeScroller'
 import Badge from './Badge'
+import Link from 'next/link'
+import Image from 'next/image'
 
 function AnimatedText({ text, style }: { text: string; style?: React.CSSProperties }) {
   const ref = useRef<HTMLSpanElement>(null)
@@ -11,7 +13,7 @@ function AnimatedText({ text, style }: { text: string; style?: React.CSSProperti
     <span ref={ref} style={{ ...style, display: 'inline' }}>
       {text.split('').map((char, i) => (
         <motion.span
-          key={i}
+          key={`${char}-${i}`}
           style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : 'normal' }}
           initial={{ opacity: 0.001, y: -20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -40,71 +42,85 @@ const POSTS = [
 ]
 
 function BlogCard({ post, delay = 0 }: { post: typeof POSTS[0]; delay?: number }) {
-  const ref = useRef<HTMLAnchorElement>(null)
-  const inView = useInView(ref as any, { once: true })
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true })
 
   return (
-    <motion.a
-      ref={ref as any}
+    <Link
       href={post.href}
-      style={{
-        background: 'rgb(251,248,233)',
-        borderRadius: 'clamp(24px, 4vw, 56px)',
-        padding: 'clamp(16px, 2.5vw, 32px)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 24,
-        textDecoration: 'none',
-        flex: 1,
-        overflow: 'hidden',
-      }}
-      initial={{ opacity: 0, y: 80 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ type: 'spring', bounce: 0.2, delay, duration: 1.5 }}
+      passHref
+      style={{ textDecoration: 'none', flex: 1, minWidth: 0 }}
     >
-      <div style={{ borderRadius: 'clamp(20px, 3vw, 36px)', overflow: 'hidden', aspectRatio: '1.37' }}>
-        <motion.img
-          src={post.img}
-          alt={post.title}
-          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-          initial={{ scale: 1.2, filter: 'grayscale(0)', rotate: 0 }}
-          animate={inView ? { scale: 1 } : {}}
-          transition={{ duration: 1.2 }}
-          whileHover={{ 
-            scale: 1.4, 
-            rotate: -6, // Flipped to left
-            filter: 'grayscale(1)',
-            transition: { duration: 0.45, ease: "circOut" }
-          }}
-        />
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-        <h4 className="font-boldonse" style={{
-          fontSize: 'clamp(18px,1.6vw,22px)',
-          textTransform: 'uppercase',
-          color: 'rgb(22,22,20)',
+      <motion.div
+        ref={ref}
+        style={{
+          background: 'rgb(251,248,233)',
+          borderRadius: 'clamp(24px, 4vw, 56px)',
+          padding: 'clamp(16px, 2.5vw, 32px)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 24,
           flex: 1,
-        }}>
-          {post.title}
-        </h4>
-        <p style={{
-          fontFamily: '"Clash Grotesk",sans-serif',
-          fontWeight: 500,
-          fontSize: 20,
-          color: 'rgb(59,59,59)',
-          whiteSpace: 'nowrap',
-          marginLeft: 12,
-        }}>
-          / {post.year}
-        </p>
-      </div>
-    </motion.a>
+          overflow: 'hidden',
+          cursor: 'pointer',
+        }}
+        initial={{ opacity: 0, y: 80 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ type: 'spring', bounce: 0.2, delay, duration: 1.5 }}
+        whileHover="hover"
+      >
+        <div style={{ borderRadius: 'clamp(20px, 3vw, 36px)', overflow: 'hidden', aspectRatio: '1.37', position: 'relative' }}>
+          <motion.div
+            style={{ width: '100%', height: '100%' }}
+            variants={{
+              initial: { scale: 1.2, filter: 'grayscale(0)', rotate: 0 },
+              animate: { scale: 1 },
+              hover: {
+                scale: 1.4,
+                rotate: -6,
+                filter: 'grayscale(1)',
+                transition: { duration: 0.45, ease: "circOut" }
+              }
+            }}
+            initial="initial"
+            animate={inView ? "animate" : "initial"}
+            transition={{ duration: 1.2 }}
+          >
+            <Image
+              src={post.img}
+              alt={post.title}
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </motion.div>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+          <h4 className="font-boldonse" style={{
+            fontSize: 'clamp(18px,1.6vw,22px)',
+            textTransform: 'uppercase',
+            color: 'rgb(22,22,20)',
+            flex: 1,
+          }}>
+            {post.title}
+          </h4>
+          <p style={{
+            fontFamily: '"Clash Grotesk",sans-serif',
+            fontWeight: 500,
+            fontSize: 20,
+            color: 'rgb(59,59,59)',
+            whiteSpace: 'nowrap',
+            marginLeft: 12,
+          }}>
+            / {post.year}
+          </p>
+        </div>
+      </motion.div>
+    </Link>
   )
 }
 
 export default function Blog() {
   const titleRef = useRef<HTMLDivElement>(null)
-  const titleInView = useInView(titleRef, { once: true })
 
   return (
     <section style={{
