@@ -122,46 +122,54 @@ export default function FAQ() {
   return (
     <section style={{
       background: 'rgb(255,255,255)',
+      position: 'relative',
       padding: '0 30px 5px',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
+      overflow: 'visible',
     }}>
-      <div style={{ width: '100%', maxWidth: 1200, display: 'flex', flexDirection: 'column', gap: 100 }}>
-        {/* Title */}
-        <div ref={titleRef} style={{ textAlign: 'center', position: 'relative' }}>
-          {/* BLOGS badge */}
-          <Badge
-            label="BLOGS"
-            bg="rgb(237,93,58)"
-            color="#fff"
-            rotate={12}
-            delay={0.2}
-            drag={false}
-            style={{ top: '14%', left: '89%', transform: 'translate(-50%,-50%)' }}
-          />
-          <h2 className="font-boldonse" style={{
-            fontSize: 'clamp(26px,4vw,60px)',
-            textTransform: 'uppercase',
-            color: 'rgb(22,22,20)',
-            maxWidth: 1036,
-            margin: '0 auto',
-          }}>
-            <AnimatedText text="Frequently Asked Questions" />
-          </h2>
-        </div>
+      {/* Top scalloped scroller — points DOWN into FAQ section */}
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 0, height: 60, pointerEvents: 'none' }}>
+        <ShapeScroller color="rgb(255,255,255)" height={60} direction="down" gap={20} />
+      </div>
 
-        {/* FAQ accordion list */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: '100%', maxWidth: 880, margin: '0 auto', paddingBottom: 5 }}>
-          {FAQS.map((item, i) => (
-            <FAQItem
-              key={i}
-              item={item}
-              index={i}
-              open={openIdx === i}
-              onToggle={() => setOpenIdx(openIdx === i ? -1 : i)}
+      <div style={{ padding: '160px 30px 140px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
+        <div style={{ width: '100%', maxWidth: 1200, display: 'flex', flexDirection: 'column', gap: 100 }}>
+          {/* Title with Badge */}
+          <div ref={titleRef} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 30, textAlign: 'center' }}>
+            {/* FAQ badge — Scalloped shape */}
+            <Badge
+              label="BLOGS"
+              bg="rgb(237,93,58)"
+              color="#fff"
+              rotate={12}
+              delay={0.2}
+              shape="strategy"
+              style={{ position: 'relative', top: 200, left: 400 }}
             />
-          ))}
+            <h2 className="font-boldonse" style={{
+              fontSize: 'clamp(26px,5vw,85px)',
+              textTransform: 'uppercase',
+              letterSpacing: '-0.04em',
+              lineHeight: '130%',
+              color: 'rgb(22,22,20)',
+              textAlign: 'center',
+            }}>
+              <AnimatedText text="Frequently Asked" /><br />
+              <AnimatedText text="Questions" />
+            </h2>
+          </div>
+
+          {/* FAQ accordion list */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: '100%', maxWidth: 880, margin: '0 auto', paddingBottom: 5 }}>
+            {FAQS.map((item, i) => (
+              <FAQItem
+                key={i}
+                item={item}
+                index={i}
+                open={openIdx === i}
+                onToggle={() => setOpenIdx(openIdx === i ? -1 : i)}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

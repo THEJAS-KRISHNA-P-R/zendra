@@ -42,7 +42,7 @@ export default function Badge({
 
   return (
     <motion.div
-      className={className}
+      className={`hidden lg:block ${className || ''}`}
       style={{ position: 'absolute', ...style, zIndex: 10, cursor: 'default' }}
       drag={drag ? true : false}
       dragSnapToOrigin={true}

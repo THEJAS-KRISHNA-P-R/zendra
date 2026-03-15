@@ -49,8 +49,8 @@ function BlogCard({ post, delay = 0 }: { post: typeof POSTS[0]; delay?: number }
       href={post.href}
       style={{
         background: 'rgb(251,248,233)',
-        borderRadius: 30,
-        padding: 24,
+        borderRadius: 56, // Matched with Portfolio
+        padding: 32,      // Matched with Portfolio
         display: 'flex',
         flexDirection: 'column',
         gap: 24,
@@ -61,17 +61,21 @@ function BlogCard({ post, delay = 0 }: { post: typeof POSTS[0]; delay?: number }
       initial={{ opacity: 0, y: 80 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ type: 'spring', bounce: 0.2, delay, duration: 1.5 }}
-      whileHover={{ y: -5 }}
     >
-      <div style={{ borderRadius: 26, overflow: 'hidden', aspectRatio: '1.37' }}>
+      <div style={{ borderRadius: 36, overflow: 'hidden', aspectRatio: '1.37' }}>
         <motion.img
           src={post.img}
           alt={post.title}
           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-          initial={{ scale: 1.2 }}
+          initial={{ scale: 1.2, filter: 'grayscale(0)', rotate: 0 }}
           animate={inView ? { scale: 1 } : {}}
           transition={{ duration: 1.2 }}
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ 
+            scale: 1.4, 
+            rotate: -6, // Flipped to left
+            filter: 'grayscale(1)',
+            transition: { duration: 0.45, ease: "circOut" }
+          }}
         />
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
@@ -106,11 +110,11 @@ export default function Blog() {
     <section style={{
       background: 'rgb(255,255,255)',
       position: 'relative',
-      overflow: 'hidden',
+      overflow: 'visible',
     }}>
-      {/* Top pink scalloped scroller — points DOWN into white Blog section */}
-      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 0, height: 40, pointerEvents: 'none' }}>
-        <ShapeScroller color="rgb(252,206,240)" height={40} direction="down" gap={20} />
+      {/* Top white scalloped scroller — points UP into pink Testimonials section */}
+      <div style={{ position: 'absolute', top: -30, left: 0, right: 0, zIndex: 0, height: 30, pointerEvents: 'none' }}>
+        <ShapeScroller color="rgb(255,255,255)" height={30} direction="up" gap={20} />
       </div>
 
       <div style={{ padding: '200px 30px 190px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
@@ -124,16 +128,18 @@ export default function Blog() {
               color="#fff"
               rotate={12}
               delay={0.2}
-              drag={false}
-              style={{ top: '-10%', left: '91%', transform: 'translate(-50%,-50%)' }}
+              shape="strategy"
+              style={{ position: 'relative', top: 55, left: 440 }}
             />
             <h2 className="font-boldonse" style={{
               fontSize: 'clamp(26px,5.5vw,80px)',
               textTransform: 'uppercase',
-              letterSpacing: 'clamp(-1px,-0.3vw,-4px)',
+              lineHeight: '130%',
+              letterSpacing: 'clamp(-3px,-0.3vw,-4px)',
               color: 'rgb(22,22,20)',
             }}>
-              <AnimatedText text="From Our Blog" />
+              <AnimatedText text="From Our" /><br></br>
+              <AnimatedText text="Blog" />
             </h2>
           </div>
 

@@ -2,13 +2,14 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import ShapeScroller from './ShapeScroller'
+import Badge from './Badge'
 
 function AnimatedText({ text, style }: { text: string; style?: React.CSSProperties }) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
-  
+
   const words = text.split(' ')
-  
+
   return (
     <span ref={ref} style={{ ...style, display: 'inline-block', flexWrap: 'wrap' }}>
       {words.map((word, wordIdx) => (
@@ -147,53 +148,55 @@ export default function Testimonials() {
       overflow: 'visible',
     }}>
       {/* Top pink scalloped scroller — points UP into white Team section */}
-      <div style={{ position: 'absolute', top: -40, left: 0, right: 0, zIndex: 0, height: 60, pointerEvents: 'none' }}>
-        <ShapeScroller color="rgb(252,206,240)" height={60} direction="up" gap={20} />
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 0, height: 60, pointerEvents: 'none' }}>
+        <ShapeScroller color="rgb(255,255,255)" height={60} direction="down" gap={20} />
       </div>
 
       <div style={{ padding: '140px 30px 180px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
         <div style={{ width: '100%', maxWidth: 1360, display: 'flex', flexDirection: 'column', gap: 100 }}>
           {/* Title */}
-          <div ref={titleRef} style={{ position: 'relative', textAlign: 'center' }}>
+          <div ref={titleRef} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 30, textAlign: 'center' }}>
             {/* TESTIMONIALS badge */}
-            <motion.div
-              style={{ position: 'absolute', top: '-13%', left: '18%', transform: 'translate(-50%,-50%)' }}
-              initial={{ opacity: 0.001, y: 800 }}
-              animate={titleInView ? { opacity: 1, y: 0, rotate: -13 } : {}}
-              transition={{ type: 'spring', bounce: 0.2, delay: 0.2, duration: 2 }}
-            >
-              <div style={{
-                background: 'rgb(237,93,58)',
-                borderRadius: 100,
-                padding: '8px 18px',
-                fontFamily: '"Boldonse",sans-serif',
-                fontSize: 14,
-                color: '#fff',
-                textTransform: 'uppercase',
-              }}>
-                TESTIMONIALS
-              </div>
-            </motion.div>
+            <Badge
+              label="TESTIMONIALS"
+              bg="rgb(237,93,58)"
+              color="#fff"
+              rotate={-8}
+              delay={0.2}
+              shape="strategy"
+              style={{ position: 'relative', top: 55, left: -360 }}
+            />
 
             <h2 className="font-boldonse" style={{
               fontSize: 'clamp(26px,5.5vw,80px)',
               textTransform: 'uppercase',
-              letterSpacing: 'clamp(-1px,-0.3vw,-4px)',
+              letterSpacing: 'clamp(-23x,-0.3vw,-4px)',
               color: 'rgb(22,22,20)',
             }}>
-              <AnimatedText text="Trusted by Growing Brands" />
+              <AnimatedText text="Trusted by Growing" /><br />
+              <AnimatedText text="Brands" />
             </h2>
           </div>
 
-          {/* 2 rows of 2 testimonials */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 120 }}>
+          {/* 2 rows of alternating sized testimonials */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 100 }}>
+            {/* Row 1: [Large] [Small] */}
             <div className="testi-row" style={{ display: 'flex', gap: 40 }}>
-              <TestiCard t={TESTIMONIALS[0]} delay={0} />
-              <TestiCard t={TESTIMONIALS[1]} delay={0.1} />
+              <div style={{ flex: 1.4 }}>
+                <TestiCard t={TESTIMONIALS[0]} delay={0} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <TestiCard t={TESTIMONIALS[1]} delay={0.1} />
+              </div>
             </div>
+            {/* Row 2: [Small] [Large] */}
             <div className="testi-row" style={{ display: 'flex', gap: 40 }}>
-              <TestiCard t={TESTIMONIALS[2]} delay={0} />
-              <TestiCard t={TESTIMONIALS[3]} delay={0.1} />
+              <div style={{ flex: 1 }}>
+                <TestiCard t={TESTIMONIALS[2]} delay={0} />
+              </div>
+              <div style={{ flex: 1.4 }}>
+                <TestiCard t={TESTIMONIALS[3]} delay={0.1} />
+              </div>
             </div>
           </div>
         </div>
