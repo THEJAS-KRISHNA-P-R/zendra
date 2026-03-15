@@ -26,9 +26,9 @@ export default function Footer() {
       position: 'relative',
       overflow: 'hidden',
     }}>
-      {/* Top blue scalloped scroller */}
-      <div style={{ position: 'absolute', top: -39, left: 0, right: 0, zIndex: 0, height: 250 }}>
-        <ShapeScroller color="rgb(19,109,245)" height={250} />
+      {/* Top blue scalloped scroller — points UP into white CTASection */}
+      <div style={{ position: 'absolute', top: -40, left: 0, right: 0, zIndex: 0, height: 60, pointerEvents: 'none' }}>
+        <ShapeScroller color="rgb(19,109,245)" height={60} direction="up" gap={20} />
       </div>
 
       <div style={{ padding: '100px 30px 80px', position: 'relative', zIndex: 1 }}>

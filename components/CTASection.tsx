@@ -1,6 +1,8 @@
 'use client'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import ShapeScroller from './ShapeScroller'
+import Badge from './Badge'
 
 function AnimatedText({ text, style }: { text: string; style?: React.CSSProperties }) {
   const ref = useRef<HTMLSpanElement>(null)
@@ -49,41 +51,23 @@ export default function CTASection() {
           transform: 'translateX(-50%)',
         }}>
           {/* BRANDING badge */}
-          <motion.div
-            initial={{ opacity: 0.001, y: 800 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ type: 'spring', bounce: 0.2, delay: 0.2, duration: 2 }}
-          >
-            <div style={{
-              background: 'rgb(237,93,58)',
-              borderRadius: 100,
-              padding: '12px 24px',
-              fontFamily: '"Boldonse",sans-serif',
-              fontSize: 16,
-              color: '#fff',
-              textTransform: 'uppercase',
-            }}>
-              BRANDING
-            </div>
-          </motion.div>
+          <Badge
+            label="BRANDING"
+            bg="rgb(237,93,58)"
+            color="#fff"
+            delay={0.2}
+            drag={false}
+            style={{ position: 'relative' }}
+          />
           {/* MARKETING badge */}
-          <motion.div
-            initial={{ opacity: 0.001, y: 800 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ type: 'spring', bounce: 0.2, delay: 0.3, duration: 2 }}
-          >
-            <div style={{
-              background: 'rgb(55,182,105)',
-              borderRadius: 100,
-              padding: '12px 24px',
-              fontFamily: '"Boldonse",sans-serif',
-              fontSize: 16,
-              color: '#fff',
-              textTransform: 'uppercase',
-            }}>
-              MARKETING
-            </div>
-          </motion.div>
+          <Badge
+            label="MARKETING"
+            bg="rgb(55,182,105)"
+            color="#fff"
+            delay={0.3}
+            drag={false}
+            style={{ position: 'relative' }}
+          />
         </div>
 
         {/* Main CTA heading */}

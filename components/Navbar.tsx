@@ -57,9 +57,9 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 flex justify-center px-[20px] pt-[20px] md:px-[30px] md:pt-[30px] transition-transform duration-300 ease-in-out ${visible ? 'translate-y-0' : '-translate-y-full'}`}>
-        <div 
-          className="w-full max-w-[1400px] bg-[#fbf8e9] rounded-[40px] md:rounded-[56px] px-[24px] py-[24px] md:px-[50px] md:py-[32px] flex flex-col transition-shadow duration-300 relative z-50 overflow-hidden"
+      <nav className={`fixed top-0 left-0 right-0 z-50 flex justify-center px-[20px] pt-[16px] md:px-[30px] transition-transform duration-300 ease-in-out ${visible ? 'translate-y-0' : '-translate-y-full'}`}>
+        <div
+          className="w-full max-w-[1408px] bg-[#fbf8e9] rounded-[40px] md:rounded-[56px] px-[24px] py-[24px] md:px-[50px] md:py-[32px] flex flex-col transition-shadow duration-300 relative z-50 overflow-hidden"
           style={{ boxShadow: (scrolled || mobileOpen) ? '0 4px 40px rgba(0,0,0,0.12)' : 'none' }}
         >
           {/* Main Header Row */}
@@ -86,8 +86,8 @@ export default function Navbar() {
 
             {/* CTA */}
             <Link href="#" className="hidden md:inline-flex items-center gap-2 font-boldonse text-[20px] text-[#ed5d3a] hover:opacity-80 transition-opacity">
-              Let&apos;s Talk 
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              Let&apos;s Talk
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </Link>
 
             {/* Hamburger / Toggle */}
@@ -96,17 +96,17 @@ export default function Navbar() {
               onClick={() => setMobileOpen(!mobileOpen)}
             >
               <div className="flex flex-col gap-[5px] w-full items-end">
-                <motion.span 
+                <motion.span
                   animate={{ rotate: mobileOpen ? 45 : 0, y: mobileOpen ? 9 : 0, width: mobileOpen ? '26px' : '26px' }}
-                  className="h-[3.5px] bg-[#161614] rounded-full block" 
+                  className="h-[3.5px] bg-[#161614] rounded-full block"
                 />
-                <motion.span 
+                <motion.span
                   animate={{ opacity: mobileOpen ? 0 : 1 }}
-                  className="w-[24px] h-[3.5px] bg-[#161614] rounded-full block" 
+                  className="w-[24px] h-[3.5px] bg-[#161614] rounded-full block"
                 />
-                <motion.span 
+                <motion.span
                   animate={{ rotate: mobileOpen ? -45 : 0, y: mobileOpen ? -8 : 0, width: mobileOpen ? '26px' : '20px' }}
-                  className="h-[3.5px] bg-[#161614] rounded-full block" 
+                  className="h-[3.5px] bg-[#161614] rounded-full block"
                 />
               </div>
             </button>
@@ -124,21 +124,21 @@ export default function Navbar() {
               >
                 <div className="flex flex-col gap-[18px] pt-[40px] pb-[16px]">
                   {allMobileLinks.map(l => (
-                    <Link 
-                      key={l.label} 
-                      href={l.href} 
+                    <Link
+                      key={l.label}
+                      href={l.href}
                       onClick={() => setMobileOpen(false)}
                       className="font-boldonse text-[24px] text-[#161614] hover:text-[#ed5d3a] transition-colors"
                     >
                       {l.label}
                     </Link>
                   ))}
-                  <Link 
-                    href="#" 
+                  <Link
+                    href="#"
                     className="font-boldonse text-[24px] text-[#ed5d3a] mt-[10px] flex items-center gap-2"
                   >
-                    Let&apos;s Talk 
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                    Let&apos;s Talk
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   </Link>
                 </div>
               </motion.div>

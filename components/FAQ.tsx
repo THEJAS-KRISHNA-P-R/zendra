@@ -1,6 +1,8 @@
 'use client'
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
+import ShapeScroller from './ShapeScroller'
+import Badge from './Badge'
 
 function AnimatedText({ text, style }: { text: string; style?: React.CSSProperties }) {
   const ref = useRef<HTMLSpanElement>(null)
@@ -128,25 +130,16 @@ export default function FAQ() {
       <div style={{ width: '100%', maxWidth: 1200, display: 'flex', flexDirection: 'column', gap: 100 }}>
         {/* Title */}
         <div ref={titleRef} style={{ textAlign: 'center', position: 'relative' }}>
-          {/* BLOGS badge (from DOM framer-sdus82) — it says BLOGS but shown near FAQ */}
-          <motion.div
-            style={{ position: 'absolute', top: '14%', left: '89%', transform: 'translate(-50%,-50%)' }}
-            initial={{ opacity: 0.001, y: 800 }}
-            animate={titleInView ? { opacity: 1, y: 0, rotate: 12 } : {}}
-            transition={{ type: 'spring', bounce: 0.2, delay: 0.2, duration: 2 }}
-          >
-            <div style={{
-              background: 'rgb(237,93,58)',
-              borderRadius: 100,
-              padding: '8px 18px',
-              fontFamily: '"Boldonse",sans-serif',
-              fontSize: 14,
-              color: '#fff',
-              textTransform: 'uppercase',
-            }}>
-              BLOGS
-            </div>
-          </motion.div>
+          {/* BLOGS badge */}
+          <Badge
+            label="BLOGS"
+            bg="rgb(237,93,58)"
+            color="#fff"
+            rotate={12}
+            delay={0.2}
+            drag={false}
+            style={{ top: '14%', left: '89%', transform: 'translate(-50%,-50%)' }}
+          />
           <h2 className="font-boldonse" style={{
             fontSize: 'clamp(26px,4vw,60px)',
             textTransform: 'uppercase',

@@ -146,9 +146,9 @@ export default function Testimonials() {
       position: 'relative',
       overflow: 'visible',
     }}>
-      {/* Top pink scalloped scroller */}
-      <div style={{ position: 'absolute', top: -44, left: 0, right: 0, zIndex: 0, height: 250 }}>
-        <ShapeScroller color="rgb(252,206,240)" height={250} />
+      {/* Top pink scalloped scroller — points UP into white Team section */}
+      <div style={{ position: 'absolute', top: -40, left: 0, right: 0, zIndex: 0, height: 60, pointerEvents: 'none' }}>
+        <ShapeScroller color="rgb(252,206,240)" height={60} direction="up" gap={20} />
       </div>
 
       <div style={{ padding: '140px 30px 180px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>

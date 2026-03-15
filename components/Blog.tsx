@@ -2,6 +2,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import ShapeScroller from './ShapeScroller'
+import Badge from './Badge'
 
 function AnimatedText({ text, style }: { text: string; style?: React.CSSProperties }) {
   const ref = useRef<HTMLSpanElement>(null)
@@ -107,9 +108,9 @@ export default function Blog() {
       position: 'relative',
       overflow: 'hidden',
     }}>
-      {/* Top pink scalloped scroller */}
-      <div style={{ position: 'absolute', top: -208, left: 0, right: 0, zIndex: 0, height: 250 }}>
-        <ShapeScroller color="rgb(252,206,240)" height={250} />
+      {/* Top pink scalloped scroller — points DOWN into white Blog section */}
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 0, height: 40, pointerEvents: 'none' }}>
+        <ShapeScroller color="rgb(252,206,240)" height={40} direction="down" gap={20} />
       </div>
 
       <div style={{ padding: '200px 30px 190px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
@@ -117,24 +118,15 @@ export default function Blog() {
           {/* Title */}
           <div ref={titleRef} style={{ textAlign: 'center', maxWidth: 691, margin: '0 auto', position: 'relative' }}>
             {/* BLOGS badge */}
-            <motion.div
-              style={{ position: 'absolute', top: '-10%', left: '91%', transform: 'translate(-50%,-50%)' }}
-              initial={{ opacity: 0.001, y: 800 }}
-              animate={titleInView ? { opacity: 1, y: 0, rotate: 12 } : {}}
-              transition={{ type: 'spring', bounce: 0.2, delay: 0.2, duration: 2 }}
-            >
-              <div style={{
-                background: 'rgb(237,93,58)',
-                borderRadius: 100,
-                padding: '8px 18px',
-                fontFamily: '"Boldonse",sans-serif',
-                fontSize: 14,
-                color: '#fff',
-                textTransform: 'uppercase',
-              }}>
-                BLOGS
-              </div>
-            </motion.div>
+            <Badge
+              label="BLOGS"
+              bg="rgb(237,93,58)"
+              color="#fff"
+              rotate={12}
+              delay={0.2}
+              drag={false}
+              style={{ top: '-10%', left: '91%', transform: 'translate(-50%,-50%)' }}
+            />
             <h2 className="font-boldonse" style={{
               fontSize: 'clamp(26px,5.5vw,80px)',
               textTransform: 'uppercase',

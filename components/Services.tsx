@@ -1,6 +1,7 @@
 'use client'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import ShapeScroller from './ShapeScroller'
 
 function AnimatedText({ text, style }: { text: string; style?: React.CSSProperties }) {
   const ref = useRef<HTMLSpanElement>(null)
@@ -10,7 +11,7 @@ function AnimatedText({ text, style }: { text: string; style?: React.CSSProperti
   const words = text.split(' ')
   
   return (
-    <span ref={ref} style={{ ...style, display: 'inline-block', flexWrap: 'wrap' }}>
+    <span ref={ref} style={{ ...style, display: 'flex', flexWrap: 'wrap' }}>
       {words.map((word, wordIdx) => (
         <span key={wordIdx} style={{ display: 'inline-block', whiteSpace: 'nowrap', marginRight: wordIdx < words.length - 1 ? '0.3em' : 0 }}>
           {word.split('').map((char, i) => {
@@ -242,6 +243,10 @@ export default function Services() {
             </motion.a>
           ))}
         </div>
+      </div>
+
+      <div style={{ position: 'absolute', bottom: -40, left: 0, right: 0, zIndex: 0, height: 60, pointerEvents: 'none' }}>
+        <ShapeScroller color="rgb(255,255,255)" height={60} direction="down" gap={20} />
       </div>
 
       <style>{`

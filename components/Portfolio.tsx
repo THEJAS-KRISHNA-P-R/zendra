@@ -154,9 +154,9 @@ export default function Portfolio() {
       position: 'relative',
       overflow: 'visible',
     }}>
-      {/* Top cream scalloped scroller */}
-      <div style={{ position: 'absolute', top: -43, left: 0, right: 0, zIndex: 0, height: 250 }}>
-        <ShapeScroller color="rgb(251,248,233)" height={250} />
+      {/* Top cream scalloped scroller — points UP into white Services section */}
+      <div style={{ position: 'absolute', top: -40, left: 0, right: 0, zIndex: 0, height: 60, pointerEvents: 'none' }}>
+        <ShapeScroller color="rgb(251,248,233)" height={60} direction="up" gap={20} />
       </div>
 
       <div style={{ padding: '135px 30px 120px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
