@@ -36,36 +36,36 @@ function AnimatedText({ text, style }: { text: string; style?: React.CSSProperti
 
 const WORKS = [
   {
-    name: 'Astra Glow', cat: 'SEO', year: '2023',
+    name: 'Astra Glow', cat: 'SEO', year: '/2023',
     bg: 'rgb(252,206,240)', light: false,
     img: 'https://framerusercontent.com/images/MXDrMwFk0UtHXWi3bKIbDvTL6I.png',
     size: 'small',
   },
   {
-    name: 'Nova Cosmetics', cat: 'PPC', year: '2023',
+    name: 'Nova Cosmetics', cat: 'PPC', year: '/2023',
     bg: 'rgb(101,157,245)', light: true,
     img: 'https://framerusercontent.com/images/zmm6mWXMQvZkW9TrqCNNmyWPMg.png',
     size: 'large',
   },
   {
-    name: 'Celeste Beauty', cat: 'SSL', year: '2021',
+    name: 'Celeste Beauty', cat: 'SSL', year: '/2021',
     bg: 'rgb(237,93,58)', light: true,
     img: 'https://framerusercontent.com/images/jCnBbZyJbjRZhOQnLMfnVTQJvDs.jpg',
     size: 'large',
   },
   {
-    name: 'Elysia Cosmetics', cat: 'UI', year: '2022',
+    name: 'Elysia Cosmetics', cat: 'UI', year: '/2022',
     bg: 'rgb(244,255,119)', light: false,
     img: 'https://framerusercontent.com/images/JICyB7guoDFBkVoxrLlsfEykY.png',
   },
   {
-    name: 'Serenva Beauty', cat: 'UX', year: '2023',
+    name: 'Serenva Beauty', cat: 'UX', year: '/2023',
     bg: 'rgb(255,211,24)', light: false,
     img: 'https://framerusercontent.com/images/hiKjVqKwqBhYHJ0Zyu8APvaqF38.png',
     size: 'small',
   },
   {
-    name: 'Lunara Bloom', cat: 'EMAIL', year: '2024',
+    name: 'Lunara Bloom', cat: 'EMAIL', year: '/2024',
     bg: 'rgb(55,182,105)', light: true,
     img: 'https://framerusercontent.com/images/C8QGj3mn8xuHvAdDnf5HkLKns.png',
   },
@@ -106,10 +106,10 @@ function WorkCard({ work, delay = 0 }: { work: typeof WORKS[0]; delay?: number }
           animate={inView ? { scale: 1 } : {}}
           transition={{ duration: 1.2 }}
           whileHover={{
-            scale: 1.25, // Zoomed in a bit less
+            scale: 1.4, // Increased zoom for more "pop"
             rotate: 6,
             filter: 'grayscale(1)',
-            transition: { duration: 0.6, ease: "circOut" } // Increased duration
+            transition: { duration: 0.45, ease: "circOut" } // Slightly faster for snap
           }}
         />
       </div>
@@ -120,6 +120,7 @@ function WorkCard({ work, delay = 0 }: { work: typeof WORKS[0]; delay?: number }
             fontSize: 'clamp(18px,1.6vw,22px)',
             textTransform: 'uppercase',
             color: work.light ? '#fff' : 'rgb(22,22,20)',
+            paddingTop: 10,
           }}>
             {work.name}
           </h4>
@@ -129,18 +130,19 @@ function WorkCard({ work, delay = 0 }: { work: typeof WORKS[0]; delay?: number }
             fontSize: 20,
             color: work.light ? '#fff' : 'rgb(59,59,59)',
             lineHeight: '140%',
+            paddingTop: 10,
           }}>
             {work.cat}
           </p>
         </div>
         <p style={{
           fontFamily: '"Clash Grotesk",sans-serif',
-          fontWeight: 600,
-          fontSize: 16,
-          color: work.light ? 'rgba(255,255,255,0.7)' : 'rgb(22,22,20)',
-          opacity: 0.8
+          fontWeight: 500,
+          fontSize: 20,
+          color: work.light ? '#fff' : 'rgb(59,59,59)',
+          lineHeight: '140%',
         }}>
-          / {work.year}
+          {work.year}
         </p>
       </div>
     </motion.a>
@@ -162,7 +164,7 @@ export default function Portfolio() {
         <ShapeScroller color="rgb(255,255,255)" height={60} direction="down" gap={20} />
       </div>
 
-      <div style={{ padding: '135px 30px 160px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
+      <div style={{ padding: '135px 30px 220px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
         <div style={{ width: '100%', maxWidth: 1360, display: 'flex', flexDirection: 'column', gap: 100 }}>
 
           {/* Title with Badge */}

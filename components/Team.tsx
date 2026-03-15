@@ -2,13 +2,14 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import ShapeScroller from './ShapeScroller'
+import Badge from './Badge'
 
 function AnimatedText({ text, style }: { text: string; style?: React.CSSProperties }) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
-  
+
   const words = text.split(' ')
-  
+
   return (
     <span ref={ref} style={{ ...style, display: 'inline-block', flexWrap: 'wrap' }}>
       {words.map((word, wordIdx) => (
@@ -53,28 +54,26 @@ function TeamCard({ member, delay = 0 }: { member: typeof TEAM[0]; delay?: numbe
       ref={ref}
       style={{
         background: member.bg,
-        border: '1.5px solid rgb(22,22,20)',
-        boxShadow: '0px 4px 0px rgb(22,22,20)',
-        borderRadius: 26,
-        padding: 20,
+        borderRadius: 56,
+        padding: '40px 40px', // Increased vertical padding for +20px height
         display: 'flex',
         flexDirection: 'column',
-        gap: 16,
+        gap: 24,
         overflow: 'hidden',
+        minHeight: 440, // Increased by 20px from 440
+        border: 'none',
+        boxShadow: 'none',
+        outline: 'none',
       }}
-      initial={{ opacity: 0, y: 80, scale: 0.9 }}
-      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-      transition={{ type: 'spring', bounce: 0.2, delay, duration: 1.5 }}
-      whileHover={{ y: -4, boxShadow: '0px 8px 0px rgb(22,22,20)' }}
     >
       {/* Photo */}
       <motion.div
-        style={{ borderRadius: 18, overflow: 'hidden', aspectRatio: '1' }}
+        style={{ borderRadius: 36, overflow: 'hidden', aspectRatio: '1' }}
         initial={{ opacity: 0, y: 60, scale: 0.7 }}
         animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
         transition={{ type: 'spring', bounce: 0.2, delay: delay + 0.1, duration: 1.5 }}
       >
-        <img
+        <motion.img
           src={member.img}
           alt={member.name}
           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
@@ -110,7 +109,7 @@ export default function Team() {
   return (
     <section style={{
       background: 'rgb(255,255,255)',
-      padding: '220px 30px 194px',
+      padding: '60px 30px 194px',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -120,30 +119,21 @@ export default function Team() {
     }}>
       <div style={{ width: '100%', maxWidth: 1360, display: 'flex', flexDirection: 'column', gap: 100 }}>
         {/* Title + badge */}
-        <div ref={titleRef} style={{ position: 'relative' }}>
-          {/* TEAM badge at top-right */}
-          <motion.div
-            style={{ position: 'absolute', top: 0, left: '40%', transform: 'translate(0,-50%)' }}
-            initial={{ opacity: 0.001, y: 50 }}
-            animate={titleInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ type: 'spring', delay: 0.3, duration: 1 }}
-          >
-            <div style={{
-              background: 'rgb(19,109,245)',
-              borderRadius: 100,
-              padding: '10px 20px',
-              fontFamily: '"Boldonse",sans-serif',
-              fontSize: 14,
-              color: '#fff',
-              textTransform: 'uppercase',
-            }}>
-              TEAM
-            </div>
-          </motion.div>
+        <div ref={titleRef} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 30 }}>
+          {/* TEAM badge */}
+          <Badge
+            label="TEAM"
+            bg="rgb(19,109,245)"
+            color="#fff"
+            rotate={8}
+            delay={0.2}
+            shape="strategy"
+            style={{ position: 'relative', top: 165, left: 320 }}
+          />
           <h2 className="font-boldonse" style={{
             fontSize: 'clamp(26px,5.5vw,80px)',
             textTransform: 'uppercase',
-            letterSpacing: 'clamp(-1px,-0.3vw,-4px)',
+            letterSpacing: 'clamp(-3px,-0.3vw,-4px)',
             color: 'rgb(22,22,20)',
           }}>
             <AnimatedText text="Meet Our" /><br />

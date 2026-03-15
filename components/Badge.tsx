@@ -43,11 +43,11 @@ export default function Badge({
   return (
     <motion.div
       className={className}
-      style={{ position: 'absolute', ...style, zIndex: 10, cursor: drag ? 'grab' : 'default' }}
-      whileTap={drag ? { cursor: 'grabbing' } : {}}
+      style={{ position: 'absolute', ...style, zIndex: 10, cursor: 'default' }}
       drag={drag ? true : false}
-      dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
       dragSnapToOrigin={true}
+      dragElastic={0.1}
+      dragTransition={{ power: 0.3, timeConstant: 200 }}
       initial={{ opacity: 0.001, y, rotate: 0 }}
       animate={{ opacity: 1, y: 0, rotate }}
       transition={{ type: 'spring', bounce: 0.2, delay, duration: 2 }}
