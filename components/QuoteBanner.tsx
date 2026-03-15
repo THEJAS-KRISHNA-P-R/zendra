@@ -25,9 +25,9 @@ function AnimatedText({ text, style }: { text: string; style?: React.CSSProperti
 
 export default function QuoteBanner() {
   return (
-    <section style={{
+    <section className="quote-section" style={{
       background: 'rgb(255,255,255)',
-      padding: '140px 30px 380px',
+      padding: 'clamp(80px, 10vw, 140px) clamp(20px, 5vw, 30px) clamp(100px, 20vw, 380px)',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -120,6 +120,19 @@ export default function QuoteBanner() {
           <AnimatedText text="lasting brand stories." />
         </h1>
       </div>
+
+      <style>{`
+        @media (max-width: 767.98px) {
+          .quote-section {
+            padding: 80px 20px 100px !important;
+          }
+        }
+        @media (min-width: 768px) and (max-width: 1199.98px) {
+          .quote-section {
+            padding: 100px 30px 200px !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

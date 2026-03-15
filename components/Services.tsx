@@ -91,9 +91,9 @@ export default function Services() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section ref={ref} style={{
+    <section ref={ref} className="services-section" style={{
       background: 'rgb(255,255,255)',
-      padding: '200px 30px 150px',
+      padding: 'clamp(80px, 12vw, 200px) clamp(20px, 5vw, 30px) clamp(60px, 10vw, 150px)',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -103,13 +103,13 @@ export default function Services() {
     }}>
       {/* Top Divider ShapeScroller pointing DOWN (Inverted effect: Blue teeth into White) */}
       <div style={{ position: 'absolute', top: -1, left: 0, right: 0, zIndex: 10, height: 60, pointerEvents: 'none' }}>
-        <ShapeScroller color="rgb(19,109,245)" height={60} direction="down" gap={20} />
+        <ShapeScroller color="rgb(20,66,213)" height={60} direction="down" gap={20} />
       </div>
 
       <div style={{ width: '100%', maxWidth: 1360, display: 'flex', flexDirection: 'column', gap: 80 }}>
 
         {/* Section title row */}
-        <div style={{
+        <div className="services-header" style={{
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -136,7 +136,7 @@ export default function Services() {
                   WE
                   <Badge
                     label="SERVICES"
-                    bg="rgb(237,93,58)"
+                    bg="rgb(20,66,213)"
                     shape="strategy"
                     rotate={12}
                     style={{ top: '-10%', left: '50%', transform: 'translate(-50%,-100%)' }}
@@ -148,7 +148,7 @@ export default function Services() {
           </div>
 
           {/* Right: text + button */}
-          <div style={{
+          <div className="services-desc-block" style={{
             maxWidth: 339,
             display: 'flex',
             flexDirection: 'column',
@@ -158,7 +158,7 @@ export default function Services() {
             <p style={{
               fontFamily: '"Clash Grotesk",sans-serif',
               fontWeight: 500,
-              fontSize: 20,
+              fontSize: 'clamp(15px,1.4vw,20px)',
               color: 'rgb(59,59,59)',
               lineHeight: '180%',
             }}>
@@ -199,8 +199,8 @@ export default function Services() {
               style={{
                 background: svc.bg,
                 border: 'none',
-                borderRadius: 56,
-                padding: '50px 40px',
+                borderRadius: 'clamp(24px, 4vw, 56px)',
+                padding: 'clamp(24px, 3.5vw, 50px) clamp(20px, 3vw, 40px)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
@@ -210,7 +210,7 @@ export default function Services() {
                 cursor: 'pointer',
                 gridColumn: svc.col,
                 gridRow: svc.row,
-                minHeight: 400,
+                minHeight: 'clamp(260px, 35vw, 400px)',
               }}
               variants={{
                 initial: { opacity: 0, y: 90, scale: 0.9 },
@@ -238,7 +238,7 @@ export default function Services() {
             >
               <div style={{ display: 'flex', flexDirection: 'column', gap: 20, zIndex: 1, maxWidth: 450 }}>
                 <h2 className="font-boldonse" style={{
-                  fontSize: 'clamp(16px,2vw,30px)',
+                  fontSize: 'clamp(20px,2.2vw,30px)',
                   lineHeight: '180%',
                   textTransform: 'uppercase',
                   color: svc.textColor,
@@ -249,7 +249,7 @@ export default function Services() {
                 <p style={{
                   fontFamily: '"Clash Grotesk",sans-serif',
                   fontWeight: 500,
-                  fontSize: 22,
+                  fontSize: 'clamp(16px,1.4vw,22px)',
                   color: svc.descColor,
                   lineHeight: '150%',
                   maxWidth: '90%',
@@ -304,6 +304,21 @@ export default function Services() {
         @media (max-width: 767.98px) {
           .services-grid {
             grid-template-columns: 1fr !important;
+          }
+          .services-grid > a {
+            min-height: 280px !important;
+          }
+          .services-header {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+          }
+          .services-desc-block {
+            max-width: 100% !important;
+          }
+        }
+        @media (min-width: 768px) and (max-width: 1199.98px) {
+          .services-grid > a {
+            min-height: 340px !important;
           }
         }
       `}</style>

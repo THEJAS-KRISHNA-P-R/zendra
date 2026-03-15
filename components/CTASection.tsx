@@ -29,9 +29,9 @@ export default function CTASection() {
   const inView = useInView(ref, { once: true })
 
   return (
-    <section ref={ref} style={{
+    <section ref={ref} className="cta-section" style={{
       background: 'rgb(255,255,255)',
-      padding: '160px 30px 74px',
+      padding: 'clamp(80px, 10vw, 160px) clamp(20px, 5vw, 30px) clamp(50px, 6vw, 74px)',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -41,10 +41,10 @@ export default function CTASection() {
       <div style={{ width: '100%', maxWidth: 1360, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0, position: 'relative' }}>
 
         {/* Floating Badges */}
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
+        <div className="cta-float-badges" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
           <Badge
             label="BRANDING"
-            bg="rgb(237,93,58)"
+            bg="rgb(20,66,213)"
             color="#fff"
             rotate={0}
             delay={0.2}
@@ -65,7 +65,7 @@ export default function CTASection() {
         {/* Main CTA heading */}
         <div style={{ textAlign: 'center', position: 'relative' }}>
           {/* Decorative scribbles */}
-          <div style={{ position: 'absolute', top: -66, left: '48%', width: '69%', display: 'flex', justifyContent: 'space-between', transform: 'translateX(-50%)' }}>
+          <div className="cta-scribbles" style={{ position: 'absolute', top: -66, left: '48%', width: '69%', display: 'flex', justifyContent: 'space-between', transform: 'translateX(-50%)' }}>
             <svg width="66" height="86" viewBox="0 0 88 113" style={{ opacity: 0.6 }}>
               <path d="M 32.804 37.346 L 23.759 28.755 L 0 14.445 L 15.532 0 L 27.795 24.047 L 37.263 33.93 Z" fill="rgb(254,149,180)" transform="translate(44.66 61.155)" />
             </svg>
@@ -122,6 +122,17 @@ export default function CTASection() {
         {/* Asterisk */}
 
       </div>
+
+      <style>{`
+        @media (max-width: 767.98px) {
+          .cta-section { padding: 80px 20px 50px !important; }
+          .cta-float-badges { display: none !important; }
+          .cta-scribbles { display: none !important; }
+        }
+        @media (min-width: 768px) and (max-width: 1199.98px) {
+          .cta-section { padding: 100px 30px 60px !important; }
+        }
+      `}</style>
     </section>
   )
 }

@@ -5,7 +5,7 @@
 :root {
   --white: rgb(255, 255, 255);
   --dark: rgb(22, 22, 20);
-  --blue: rgb(19, 109, 245);
+  --blue: rgb(20, 66, 213);
   --cream: rgb(251, 248, 233);
   --pink: rgb(252, 206, 240);
   --yellow: rgb(244, 255, 119);
@@ -48,7 +48,8 @@ a {
   text-decoration: none
 }
 
-img {
+img,
+svg {
   max-width: 100%;
   display: block
 }

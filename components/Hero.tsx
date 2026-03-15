@@ -52,10 +52,17 @@ export default function Hero() {
 
   return (
     <section
-      className="w-full max-md:pt-[145px] max-md:px-[20px] max-md:pb-[50px] pt-[226px] px-[30px] pb-[80px] flex flex-col items-center gap-5 relative z-10"
+      className="hero-section"
       style={{
-        backgroundColor: 'rgb(19,109,245)',
+        padding: 'clamp(145px, 15vw, 226px) clamp(20px, 5vw, 30px) clamp(50px, 6vw, 80px)',
+        backgroundColor: 'rgb(20,66,213)',
         overflow: 'visible',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 20,
+        position: 'relative',
+        zIndex: 10,
       }}
     >
       {/* Halftone BG image */}
@@ -136,7 +143,7 @@ export default function Hero() {
           <div className="flex flex-1 max-md:flex-col max-md:items-start md:items-center max-md:gap-4 md:gap-[36px] md:max-w-[354px]">
             <motion.h4
               className="font-boldonse max-md:!max-w-none max-md:text-left text-left"
-              style={{ fontSize: 'clamp(18px,2vw,24px)', color: '#fff', maxWidth: 96, lineHeight: '31px' }}
+              style={{ fontSize: 'clamp(18px,2vw,24px)', color: '#fff', lineHeight: '31px' }}
               initial={{ opacity: 0.001, y: 800 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: 'spring', bounce: 0.2, delay: 0.2, duration: 2 }}

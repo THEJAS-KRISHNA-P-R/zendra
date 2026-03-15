@@ -57,6 +57,7 @@ function FAQItem({ item, index, open, onToggle }: {
     <motion.div
       ref={ref}
       onClick={onToggle}
+      className="faq-item"
       style={{
         background: 'rgb(251,248,233)',
         borderRadius: 26,
@@ -131,14 +132,14 @@ export default function FAQ() {
         <ShapeScroller color="rgb(255,255,255)" height={60} direction="down" gap={20} />
       </div>
 
-      <div style={{ padding: '160px 30px 140px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
+      <div className="faq-content" style={{ padding: 'clamp(80px, 10vw, 160px) clamp(20px, 5vw, 30px) clamp(80px, 10vw, 140px)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
         <div style={{ width: '100%', maxWidth: 1200, display: 'flex', flexDirection: 'column', gap: 100 }}>
           {/* Title with Badge */}
           <div ref={titleRef} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 30, textAlign: 'center' }}>
             {/* FAQ badge — Scalloped shape */}
             <Badge 
               label="FAQ"
-              bg="rgb(19,109,245)"
+              bg="rgb(20,66,213)"
               color="#fff"
               rotate={-12}
               delay={0.2}
@@ -172,6 +173,17 @@ export default function FAQ() {
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 767.98px) {
+          .faq-content { padding: 80px 20px 80px !important; }
+          .faq-item { padding: 24px 24px !important; }
+        }
+        @media (min-width: 768px) and (max-width: 1199.98px) {
+          .faq-content { padding: 100px 30px 100px !important; }
+          .faq-item { padding: 36px 36px !important; }
+        }
+      `}</style>
     </section>
   )
 }

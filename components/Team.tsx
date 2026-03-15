@@ -54,13 +54,13 @@ function TeamCard({ member, delay = 0 }: { member: typeof TEAM[0]; delay?: numbe
       ref={ref}
       style={{
         background: member.bg,
-        borderRadius: 56,
-        padding: '40px 40px', // Increased vertical padding for +20px height
+        borderRadius: 'clamp(24px, 4vw, 56px)',
+        padding: 'clamp(20px, 3vw, 40px)',
         display: 'flex',
         flexDirection: 'column',
         gap: 24,
         overflow: 'hidden',
-        minHeight: 440, // Increased by 20px from 440
+        minHeight: 'clamp(260px, 35vw, 440px)',
         border: 'none',
         boxShadow: 'none',
         outline: 'none',
@@ -68,7 +68,7 @@ function TeamCard({ member, delay = 0 }: { member: typeof TEAM[0]; delay?: numbe
     >
       {/* Photo */}
       <motion.div
-        style={{ borderRadius: 36, overflow: 'hidden', aspectRatio: '1' }}
+        style={{ borderRadius: 'clamp(20px, 3vw, 36px)', overflow: 'hidden', aspectRatio: '1' }}
         initial={{ opacity: 0, y: 60, scale: 0.7 }}
         animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
         transition={{ type: 'spring', bounce: 0.2, delay: delay + 0.1, duration: 1.5 }}
@@ -82,7 +82,7 @@ function TeamCard({ member, delay = 0 }: { member: typeof TEAM[0]; delay?: numbe
       {/* Info */}
       <div>
         <h4 className="font-boldonse" style={{
-          fontSize: 'clamp(16px,1.4vw,24px)',
+          fontSize: 'clamp(18px,1.4vw,24px)',
           textTransform: 'uppercase',
           color: member.light ? '#fff' : 'rgb(22,22,20)',
           marginBottom: 4,
@@ -92,7 +92,7 @@ function TeamCard({ member, delay = 0 }: { member: typeof TEAM[0]; delay?: numbe
         <p style={{
           fontFamily: '"Clash Grotesk",sans-serif',
           fontWeight: 500,
-          fontSize: 'clamp(14px,1.1vw,20px)',
+          fontSize: 'clamp(15px,1.1vw,18px)',
           color: member.light ? '#fff' : 'rgb(59,59,59)',
         }}>
           {member.role}
@@ -107,7 +107,7 @@ export default function Team() {
   const titleInView = useInView(titleRef, { once: true })
 
   return (
-    <section style={{
+    <section className="team-section" style={{
       background: 'rgb(255,255,255)',
       padding: '60px 30px 194px',
       display: 'flex',
@@ -123,7 +123,7 @@ export default function Team() {
           {/* TEAM badge */}
           <Badge
             label="TEAM"
-            bg="rgb(19,109,245)"
+            bg="rgb(20,66,213)"
             color="#fff"
             rotate={8}
             delay={0.2}
@@ -158,7 +158,9 @@ export default function Team() {
           .team-grid { grid-template-columns: repeat(3,1fr) !important; }
         }
         @media (max-width:767.98px) {
-          .team-grid { grid-template-columns: repeat(2,1fr) !important; }
+          .team-grid { grid-template-columns: 1fr !important; }
+          .team-section { padding: 60px 20px 80px !important; }
+          .team-badge { display: none !important; }
         }
       `}</style>
     </section>

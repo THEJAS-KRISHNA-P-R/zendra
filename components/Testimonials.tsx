@@ -83,6 +83,7 @@ function TestiCard({ t, delay = 0 }: { t: typeof TESTIMONIALS[0]; delay?: number
         minWidth: 0,
         boxShadow: '0px 4px 20px rgba(0,0,0,0.05)',
       }}
+      className="testi-card"
       initial={{ opacity: 0, y: 80, scale: 0.8 }}
       animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
       transition={{ type: 'spring', bounce: 0.2, delay, duration: 1.5 }}
@@ -152,14 +153,14 @@ export default function Testimonials() {
         <ShapeScroller color="rgb(255,255,255)" height={60} direction="down" gap={20} />
       </div>
 
-      <div style={{ padding: '140px 30px 180px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
+      <div className="testi-content" style={{ padding: 'clamp(80px, 10vw, 140px) clamp(20px, 5vw, 30px) clamp(100px, 12vw, 180px)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
         <div style={{ width: '100%', maxWidth: 1360, display: 'flex', flexDirection: 'column', gap: 100 }}>
           {/* Title */}
           <div ref={titleRef} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 30, textAlign: 'center' }}>
             {/* TESTIMONIALS badge */}
             <Badge
               label="TESTIMONIALS"
-              bg="rgb(237,93,58)"
+              bg="rgb(20,66,213)"
               color="#fff"
               rotate={-8}
               delay={0.2}
@@ -179,7 +180,7 @@ export default function Testimonials() {
           </div>
 
           {/* 2 rows of alternating sized testimonials */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 100 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 100 }} className="testi-rows">
             {/* Row 1: [Large] [Small] */}
             <div className="testi-row" style={{ display: 'flex', gap: 40 }}>
               <div style={{ flex: 1.4 }}>
@@ -205,6 +206,14 @@ export default function Testimonials() {
       <style>{`
         @media (max-width: 767.98px) {
           .testi-row { flex-direction: column !important; }
+          .testi-content { padding: 80px 20px 100px !important; }
+          .testi-card { padding: 40px 24px !important; gap: 32px !important; }
+          .testi-rows { gap: 40px !important; }
+        }
+        @media (min-width: 768px) and (max-width: 1199.98px) {
+          .testi-content { padding: 100px 30px 120px !important; }
+          .testi-card { padding: 50px 40px !important; }
+          .testi-rows { gap: 60px !important; }
         }
       `}</style>
     </section>

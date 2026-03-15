@@ -83,8 +83,8 @@ function WorkCard({ work, delay = 0 }: { work: typeof WORKS[0]; delay?: number }
         background: work.bg,
         border: 'none',
         boxShadow: 'none',
-        borderRadius: 56,
-        padding: 32,
+        borderRadius: 'clamp(24px, 4vw, 56px)',
+        padding: 'clamp(16px, 2.5vw, 32px)',
         display: 'flex',
         flexDirection: 'column',
         gap: 24,
@@ -97,7 +97,7 @@ function WorkCard({ work, delay = 0 }: { work: typeof WORKS[0]; delay?: number }
       transition={{ type: 'spring', bounce: 0.2, delay, duration: 1.5 }}
     >
       {/* Image */}
-      <div style={{ borderRadius: 36, overflow: 'hidden', aspectRatio: '1.32' }}>
+      <div style={{ borderRadius: 'clamp(20px, 3vw, 36px)', overflow: 'hidden', aspectRatio: '1.32' }}>
         <motion.img
           src={work.img}
           alt={work.name}
@@ -117,7 +117,7 @@ function WorkCard({ work, delay = 0 }: { work: typeof WORKS[0]; delay?: number }
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
         <div>
           <h4 className="font-boldonse" style={{
-            fontSize: 'clamp(18px,1.6vw,22px)',
+            fontSize: 'clamp(16px,1.6vw,22px)',
             textTransform: 'uppercase',
             color: work.light ? '#fff' : 'rgb(22,22,20)',
             paddingTop: 10,
@@ -127,7 +127,7 @@ function WorkCard({ work, delay = 0 }: { work: typeof WORKS[0]; delay?: number }
           <p style={{
             fontFamily: '"Clash Grotesk",sans-serif',
             fontWeight: 500,
-            fontSize: 20,
+            fontSize: 'clamp(15px,1.4vw,20px)',
             color: work.light ? '#fff' : 'rgb(59,59,59)',
             lineHeight: '140%',
             paddingTop: 10,
@@ -164,7 +164,7 @@ export default function Portfolio() {
         <ShapeScroller color="rgb(255,255,255)" height={60} direction="down" gap={20} />
       </div>
 
-      <div style={{ padding: '135px 30px 220px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
+      <div className="portfolio-content" style={{ padding: 'clamp(80px, 10vw, 135px) clamp(20px, 5vw, 30px) clamp(100px, 15vw, 220px)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
         <div style={{ width: '100%', maxWidth: 1360, display: 'flex', flexDirection: 'column', gap: 100 }}>
 
           {/* Title with Badge */}
@@ -172,12 +172,13 @@ export default function Portfolio() {
             {/* PORTFOLIO badge — Scalloped shape */}
             <Badge
               label="PORTFOLIO"
-              bg="rgb(237,93,58)"
+              bg="rgb(20,66,213)"
               color="#fff"
               rotate={-8}
               delay={0.2}
               shape="strategy"
               style={{ position: 'relative', top: 18, left: -100, transform: 'none' }}
+              className="portfolio-badge"
             />
             <h2 className="font-boldonse" style={{
               fontSize: 'clamp(26px,5vw,85px)',
@@ -224,6 +225,19 @@ export default function Portfolio() {
       <style>{`
         @media (max-width: 991.98px) {
           .portfolio-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 767.98px) {
+          .portfolio-content {
+            padding: 80px 20px 100px !important;
+          }
+          .portfolio-badge {
+            left: 0 !important;
+          }
+        }
+        @media (min-width: 768px) and (max-width: 1199.98px) {
+          .portfolio-content {
+            padding: 100px 30px 150px !important;
+          }
         }
       `}</style>
     </section>

@@ -49,8 +49,8 @@ function BlogCard({ post, delay = 0 }: { post: typeof POSTS[0]; delay?: number }
       href={post.href}
       style={{
         background: 'rgb(251,248,233)',
-        borderRadius: 56, // Matched with Portfolio
-        padding: 32,      // Matched with Portfolio
+        borderRadius: 'clamp(24px, 4vw, 56px)',
+        padding: 'clamp(16px, 2.5vw, 32px)',
         display: 'flex',
         flexDirection: 'column',
         gap: 24,
@@ -62,7 +62,7 @@ function BlogCard({ post, delay = 0 }: { post: typeof POSTS[0]; delay?: number }
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ type: 'spring', bounce: 0.2, delay, duration: 1.5 }}
     >
-      <div style={{ borderRadius: 36, overflow: 'hidden', aspectRatio: '1.37' }}>
+      <div style={{ borderRadius: 'clamp(20px, 3vw, 36px)', overflow: 'hidden', aspectRatio: '1.37' }}>
         <motion.img
           src={post.img}
           alt={post.title}
@@ -117,14 +117,14 @@ export default function Blog() {
         <ShapeScroller color="rgb(255,255,255)" height={30} direction="up" gap={20} />
       </div>
 
-      <div style={{ padding: '200px 30px 190px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
+      <div className="blog-content" style={{ padding: 'clamp(80px, 12vw, 200px) clamp(20px, 5vw, 30px) clamp(80px, 12vw, 190px)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
         <div style={{ width: '100%', maxWidth: 1360, display: 'flex', flexDirection: 'column', gap: 100 }}>
           {/* Title */}
           <div ref={titleRef} style={{ textAlign: 'center', maxWidth: 691, margin: '0 auto', position: 'relative' }}>
             {/* BLOGS badge */}
             <Badge
               label="BLOGS"
-              bg="rgb(237,93,58)"
+              bg="rgb(20,66,213)"
               color="#fff"
               rotate={12}
               delay={0.2}
@@ -144,13 +144,29 @@ export default function Blog() {
           </div>
 
           {/* 2-col blog cards */}
-          <div style={{ display: 'flex', gap: 40 }}>
+          <div className="blog-cards" style={{ display: 'flex', gap: 40 }}>
             {POSTS.map((post, i) => (
               <BlogCard key={post.title} post={post} delay={i * 0.1} />
             ))}
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 767.98px) {
+          .blog-content {
+            padding: 80px 20px 80px !important;
+          }
+          .blog-cards {
+            flex-direction: column !important;
+          }
+        }
+        @media (min-width: 768px) and (max-width: 1199.98px) {
+          .blog-content {
+            padding: 120px 30px 120px !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }
