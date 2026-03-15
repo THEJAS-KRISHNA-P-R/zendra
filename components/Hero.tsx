@@ -302,10 +302,6 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      {/* Bottom shape scroller — white shapes pointing UP into blue hero */}
-      <div className="absolute left-0 right-0 w-full h-[60px] z-0 pointer-events-none" style={{ bottom: -20 }}>
-        <ShapeScroller color="rgb(255,255,255)" height={60} direction="up" gap={20} />
-      </div>
 
       <style>{`
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
