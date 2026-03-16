@@ -124,7 +124,7 @@ export default function Team() {
           {/* TEAM badge */}
           <Badge
             label="TEAM"
-            bg="rgb(20,66,213)"
+            bg="rgba(24, 120, 222, 1)"
             color="#fff"
             rotate={8}
             delay={0.2}

@@ -52,7 +52,6 @@ function FAQItem({ item, index, open, onToggle }: {
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true })
-
   return (
     <motion.div
       ref={ref}
@@ -60,8 +59,8 @@ function FAQItem({ item, index, open, onToggle }: {
       className="faq-item"
       style={{
         background: 'rgb(251,248,233)',
-        borderRadius: 26,
-        padding: open ? '50px 50px' : '50px 50px 50px',
+        borderRadius: 31,
+        padding: open ? '45px 80px' : '45px 80px 45px',
         cursor: 'pointer',
         overflow: 'hidden',
         display: 'flex',
@@ -131,19 +130,18 @@ export default function FAQ() {
         <ShapeScroller color="rgb(255,255,255)" height={60} direction="down" gap={20} />
       </div>
 
-      <div className="faq-content" style={{ padding: 'clamp(80px, 10vw, 160px) clamp(20px, 5vw, 30px) clamp(80px, 10vw, 140px)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
+      <div className="faq-content" style={{ padding: 'calc(10vw - 40px) clamp(10px, 5vw, 30px) 10vw', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
         <div style={{ width: '100%', maxWidth: 1200, display: 'flex', flexDirection: 'column', gap: 100 }}>
           {/* Title with Badge */}
           <div ref={titleRef} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 30, textAlign: 'center' }}>
             {/* FAQ badge — Scalloped shape */}
-            <Badge 
+            <Badge
               label="FAQ"
-              bg="rgb(20,66,213)"
-              color="#fff"
-              rotate={-12}
+              bg="rgb(237,93,58)" color="#fff"
+              rotate={12}
               delay={0.2}
               shape="strategy"
-              style={{ position: 'relative', top: 0, left: -60 }}
+              style={{ position: 'relative', top: 215, left: 380 }}
             />
             <h2 className="font-boldonse" style={{
               fontSize: 'clamp(26px,5vw,85px)',
@@ -176,11 +174,11 @@ export default function FAQ() {
       <style>{`
         @media (max-width: 767.98px) {
           .faq-content { padding: 80px 20px 80px !important; }
-          .faq-item { padding: 24px 24px !important; }
+          .faq-item { padding: 19px 54px !important; border-radius: 31px !important; }
         }
         @media (min-width: 768px) and (max-width: 1199.98px) {
           .faq-content { padding: 100px 30px 100px !important; }
-          .faq-item { padding: 36px 36px !important; }
+          .faq-item { padding: 31px 66px !important; border-radius: 31px !important; }
         }
       `}</style>
     </section>

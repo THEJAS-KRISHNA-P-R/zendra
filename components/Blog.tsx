@@ -64,10 +64,17 @@ function BlogCard({ post, delay = 0 }: { post: typeof POSTS[0]; delay?: number }
           overflow: 'hidden',
           cursor: 'pointer',
         }}
-        initial={{ opacity: 0, y: 80 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ type: 'spring', bounce: 0.2, delay, duration: 1.5 }}
+        initial="initial"
+        animate={inView ? "animate" : "initial"}
         whileHover="hover"
+        variants={{
+          initial: { opacity: 0, y: 80 },
+          animate: { opacity: 1, y: 0 },
+          hover: {
+            transition: { duration: 0.4, ease: "easeInOut" }
+          }
+        }}
+        transition={{ type: 'spring', bounce: 0.2, delay, duration: 1.5 }}
       >
         <div style={{ borderRadius: 'clamp(20px, 3vw, 36px)', overflow: 'hidden', aspectRatio: '1.37', position: 'relative' }}>
           <motion.div
@@ -82,8 +89,6 @@ function BlogCard({ post, delay = 0 }: { post: typeof POSTS[0]; delay?: number }
                 transition: { duration: 0.45, ease: "circOut" }
               }
             }}
-            initial="initial"
-            animate={inView ? "animate" : "initial"}
             transition={{ duration: 1.2 }}
           >
             <Image
@@ -95,24 +100,29 @@ function BlogCard({ post, delay = 0 }: { post: typeof POSTS[0]; delay?: number }
           </motion.div>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-          <h4 className="font-boldonse" style={{
-            fontSize: 'clamp(18px,1.6vw,22px)',
-            textTransform: 'uppercase',
-            color: 'rgb(22,22,20)',
-            flex: 1,
-          }}>
+          <motion.h4
+            className="font-boldonse"
+            style={{
+              fontSize: 'clamp(18px,1.6vw,22px)',
+              textTransform: 'uppercase',
+              color: 'rgb(22,22,20)',
+              flex: 1,
+            }}
+          >
             {post.title}
-          </h4>
-          <p style={{
-            fontFamily: '"Clash Grotesk",sans-serif',
-            fontWeight: 500,
-            fontSize: 20,
-            color: 'rgb(59,59,59)',
-            whiteSpace: 'nowrap',
-            marginLeft: 12,
-          }}>
+          </motion.h4>
+          <motion.p
+            style={{
+              fontFamily: '"Clash Grotesk",sans-serif',
+              fontWeight: 500,
+              fontSize: 20,
+              color: 'rgb(59,59,59)',
+              whiteSpace: 'nowrap',
+              marginLeft: 12,
+            }}
+          >
             / {post.year}
-          </p>
+          </motion.p>
         </div>
       </motion.div>
     </Link>
@@ -140,8 +150,7 @@ export default function Blog() {
             {/* BLOGS badge */}
             <Badge
               label="BLOGS"
-              bg="rgb(20,66,213)"
-              color="#fff"
+              bg="rgb(237,93,58)" color="#fff"
               rotate={12}
               delay={0.2}
               shape="strategy"

@@ -42,7 +42,7 @@ export default function ShapeScroller({
         flexDirection: 'row',
         whiteSpace: 'nowrap',
         width: 'fit-content',
-        animation: 'scroll-left 60s linear infinite',
+        animation: 'scroll-left 86s linear infinite',
         marginTop: direction === 'down' ? -1 : 0,
         marginBottom: direction === 'up' ? -2 : 0,
       }}>

@@ -167,7 +167,7 @@ export default function Testimonials() {
             {/* TESTIMONIALS badge */}
             <Badge
               label="TESTIMONIALS"
-              bg="rgb(20,66,213)"
+              bg="rgb(237,93,58)"
               color="#fff"
               rotate={-8}
               delay={0.2}

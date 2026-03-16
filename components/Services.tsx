@@ -74,7 +74,7 @@ export default function Services() {
     }}>
       {/* Top Divider ShapeScroller pointing DOWN (Inverted effect: Blue teeth into White) */}
       <div style={{ position: 'absolute', top: -1, left: 0, right: 0, zIndex: 10, height: 60, pointerEvents: 'none' }}>
-        <ShapeScroller color="rgb(20,66,213)" height={60} direction="down" gap={20} />
+        <ShapeScroller color="rgba(24, 120, 222, 1)" height={60} direction="down" gap={20} />
       </div>
 
       <div style={{ width: '100%', maxWidth: 1360, display: 'flex', flexDirection: 'column', gap: 80 }}>
@@ -107,8 +107,7 @@ export default function Services() {
                   WE
                   <Badge
                     label="SERVICES"
-                    bg="rgb(20,66,213)"
-                    shape="strategy"
+                    bg="rgb(237,93,58)" shape="strategy"
                     rotate={12}
                     style={{ top: '-10%', left: '50%', transform: 'translate(-50%,-100%)' }}
                   />

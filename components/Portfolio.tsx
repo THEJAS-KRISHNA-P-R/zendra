@@ -46,7 +46,7 @@ const WORKS = [
   {
     name: 'Nova Cosmetics', cat: 'PPC', year: '/2023',
     bg: 'rgb(101,157,245)', light: true,
-    img: 'https://framerusercontent.com/images/zmm6mWXMQvZkW9TrqCNNmyWPMg.png',
+    img: '/nova-cosmetics.jpg',
     size: 'large',
   },
   {
@@ -97,10 +97,17 @@ function WorkCard({ work, delay = 0 }: { work: typeof WORKS[0]; delay?: number }
           overflow: 'hidden',
           minWidth: 0,
         }}
-        initial={{ opacity: 0, y: 100, scale: 0.8 }}
-        animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-        transition={{ type: 'spring', bounce: 0.2, delay, duration: 1.5 }}
+        initial="initial"
+        animate={inView ? "animate" : "initial"}
         whileHover="hover"
+        variants={{
+          initial: { opacity: 0, y: 100, scale: 0.8 },
+          animate: { opacity: 1, y: 0, scale: 1 },
+          hover: {
+            transition: { duration: 0.4, ease: "easeInOut" }
+          }
+        }}
+        transition={{ type: 'spring', bounce: 0.2, delay, duration: 1.5 }}
       >
         {/* Image */}
         <div style={{ borderRadius: 'clamp(20px, 3vw, 36px)', overflow: 'hidden', aspectRatio: '1.32', position: 'relative' }}>
@@ -116,8 +123,6 @@ function WorkCard({ work, delay = 0 }: { work: typeof WORKS[0]; delay?: number }
                 transition: { duration: 0.45, ease: "circOut" }
               }
             }}
-            initial="initial"
-            animate={inView ? "animate" : "initial"}
             transition={{ duration: 1.2 }}
           >
             <Image
@@ -131,34 +136,41 @@ function WorkCard({ work, delay = 0 }: { work: typeof WORKS[0]; delay?: number }
         {/* Card content */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <div>
-            <h4 className="font-boldonse" style={{
-              fontSize: 'clamp(16px,1.6vw,22px)',
-              textTransform: 'uppercase',
-              color: work.light ? '#fff' : 'rgb(22,22,20)',
-              paddingTop: 10,
-            }}>
+            <motion.h4
+              className="font-boldonse"
+              style={{
+                fontSize: 'clamp(16px,1.6vw,22px)',
+                textTransform: 'uppercase',
+                color: work.light ? '#fff' : 'rgb(22,22,20)',
+                paddingTop: 10,
+              }}
+            >
               {work.name}
-            </h4>
-            <p style={{
+            </motion.h4>
+            <motion.p
+              style={{
+                fontFamily: '"Clash Grotesk",sans-serif',
+                fontWeight: 500,
+                fontSize: 'clamp(15px,1.4vw,20px)',
+                color: work.light ? '#fff' : 'rgb(59,59,59)',
+                lineHeight: '140%',
+                paddingTop: 10,
+              }}
+            >
+              {work.cat}
+            </motion.p>
+          </div>
+          <motion.p
+            style={{
               fontFamily: '"Clash Grotesk",sans-serif',
               fontWeight: 500,
-              fontSize: 'clamp(15px,1.4vw,20px)',
+              fontSize: 20,
               color: work.light ? '#fff' : 'rgb(59,59,59)',
               lineHeight: '140%',
-              paddingTop: 10,
-            }}>
-              {work.cat}
-            </p>
-          </div>
-          <p style={{
-            fontFamily: '"Clash Grotesk",sans-serif',
-            fontWeight: 500,
-            fontSize: 20,
-            color: work.light ? '#fff' : 'rgb(59,59,59)',
-            lineHeight: '140%',
-          }}>
+            }}
+          >
             {work.year}
-          </p>
+          </motion.p>
         </div>
       </motion.div>
     </Link>
@@ -188,8 +200,7 @@ export default function Portfolio() {
             {/* PORTFOLIO badge — Scalloped shape */}
             <Badge
               label="PORTFOLIO"
-              bg="rgb(20,66,213)"
-              color="#fff"
+              bg="rgb(237,93,58)" color="#fff"
               rotate={-8}
               delay={0.2}
               shape="strategy"

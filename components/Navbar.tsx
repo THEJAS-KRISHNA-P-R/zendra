@@ -79,7 +79,7 @@ export default function Navbar() {
             {/* Desktop nav links */}
             <div className="hidden md:flex items-center gap-[24px] lg:gap-[40px]">
               {navLinks.map(l => (
-                <Link key={l.label} href={l.href} className="font-boldonse text-[16px] lg:text-[18px] text-[#1442d5] hover:opacity-80 transition-opacity">
+                <Link key={l.label} href={l.href} className="font-boldonse text-[16px] lg:text-[18px] text-[rgba(24,120,222,1)] hover:opacity-80 transition-opacity">
                   {l.label}
                 </Link>
               ))}

@@ -45,8 +45,7 @@ export default function CTASection() {
         <div className="cta-float-badges" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
           <Badge
             label="BRANDING"
-            bg="rgb(20,66,213)"
-            color="#fff"
+            bg="rgb(237,93,58)" color="#fff"
             rotate={0}
             delay={0.2}
             shape="flatPill"
@@ -107,16 +106,16 @@ export default function CTASection() {
           <Link href="#" style={{
             background: 'rgb(252,206,240)',
             borderRadius: 100,
-            padding: '30px 30px',
+            padding: '30px 40px',
             fontFamily: '"Boldonse",sans-serif',
             fontSize: 20,
-            color: 'rgb(22,22,20)',
             display: 'inline-flex',
             alignItems: 'center',
-            gap: 5,
+            gap: 12,
             textDecoration: 'none',
+            color: 'rgb(22,22,20)',
           }}>
-            Get Started →
+            Get Started <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </Link>
         </motion.div>
 
