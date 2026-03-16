@@ -24,10 +24,10 @@ function AnimatedText({ text, className, style, delay = 0 }: { text: string; cla
                 style={{ display: 'inline-block', willChange: 'transform' }}
                 initial={{ opacity: 0, y: 20, filter: 'blur(12px)' }}
                 animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
-                transition={{ 
-                  delay: delay + (charIdx * 0.03), 
-                  duration: 0.6, 
-                  ease: [0.215, 0.61, 0.355, 1] 
+                transition={{
+                  delay: delay + (charIdx * 0.03),
+                  duration: 0.6,
+                  ease: [0.215, 0.61, 0.355, 1]
                 }}
               >
                 {char}
@@ -43,10 +43,10 @@ function AnimatedText({ text, className, style, delay = 0 }: { text: string; cla
 
 export default function Hero() {
   const { scrollY } = useScroll()
-  
+
   // Asterisk opacity: 0 at start, 1 by 300px scroll
   const asteriskOpacity = useTransform(scrollY, [0, 300], [0, 1])
-  
+
   // Gear opacity and scale: 0/0.5 at start, 1/1 by 400px scroll
   const gearOpacity = useTransform(scrollY, [0, 400], [0, 1])
   const gearScale = useTransform(scrollY, [0, 400], [0.5, 1])
@@ -68,14 +68,14 @@ export default function Hero() {
     >
       {/* Halftone BG image */}
       <div style={{
-          position: 'absolute',
-          top: 'calc(20% - 20px)', left: '50%',
-          transform: 'translateX(-50%)',
-          width: '94%', maxWidth: 1273,
-          aspectRatio: '1273 / 682', // Approximate ratio based on image dimensions if known
-          opacity: 0.6,
-          zIndex: 0,
-          pointerEvents: 'none',
+        position: 'absolute',
+        top: 'calc(20% - 20px)', left: '50%',
+        transform: 'translateX(-50%)',
+        width: '94%', maxWidth: 1273,
+        aspectRatio: '1273 / 682', // Approximate ratio based on image dimensions if known
+        opacity: 0.6,
+        zIndex: 0,
+        pointerEvents: 'none',
       }}>
         <Image
           src="/AWMIgWK3TKYddF2nKX23L8sYM.png"
@@ -149,12 +149,12 @@ export default function Hero() {
           <div className="flex flex-1 max-md:flex-col max-md:items-start md:items-center max-md:gap-4 md:gap-[36px] md:max-w-[354px]">
             <motion.h4
               className="font-boldonse max-md:!max-w-none max-md:text-left text-left"
-              style={{ fontSize: 'clamp(18px,2vw,24px)', color: '#fff', lineHeight: '31px' }}
+              style={{ fontSize: 'clamp(18px,2vw,24px)', color: '#fff', lineHeight: '130%' }}
               initial={{ opacity: 0.001, y: 800 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: 'spring', bounce: 0.2, delay: 0.2, duration: 2 }}
             >
-              BRAND NEW WAVES.
+              BRAND<br />NEW<br />WAVES.
             </motion.h4>
 
             <motion.a
@@ -162,7 +162,7 @@ export default function Hero() {
               style={{
                 background: '#fff',
                 borderRadius: 100,
-                padding: '24px 28px',
+                padding: '26px 34px',
                 fontFamily: '"Boldonse",sans-serif',
                 fontSize: 20,
                 color: 'rgb(19,109,245)',
