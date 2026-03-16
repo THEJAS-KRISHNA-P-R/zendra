@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useAnimation, useInView, useScroll, useTransform } from 'framer-motion'
 import ShapeScroller from './ShapeScroller'
 import Badge from './Badge'
@@ -42,14 +42,14 @@ function AnimatedText({ text, className, style, delay = 0 }: { text: string; cla
 
 
 export default function Hero() {
-  const { scrollY } = useScroll()
+  // State-based persistence for gear and related elements
+  const gearRef = useRef(null)
+  const isInView = useInView(gearRef, { margin: '-10%' })
+  const [appeared, setAppeared] = useState(false)
 
-  // Asterisk opacity: 0 at start, 1 by 300px scroll
-  const asteriskOpacity = useTransform(scrollY, [0, 300], [0, 1])
-
-  // Gear opacity and scale: 0/0.5 at start, 1/1 by 400px scroll
-  const gearOpacity = useTransform(scrollY, [0, 400], [0, 1])
-  const gearScale = useTransform(scrollY, [0, 400], [0.5, 1])
+  useEffect(() => {
+    if (isInView) setAppeared(true)
+  }, [isInView])
 
   return (
     <section
@@ -237,8 +237,11 @@ export default function Hero() {
           color: '#fff',
           fontSize: 30,
           userSelect: 'none',
-          opacity: asteriskOpacity,
+          opacity: 1,
         }}
+        initial={{ opacity: 0 }}
+        animate={appeared ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 1, delay: 0.1 }}
       >
         ✳
       </motion.div>
@@ -252,9 +255,13 @@ export default function Hero() {
           transform: 'translate(-50%,-50%)',
           zIndex: 2,
           width: 320, height: 320, // Square container for the unified viewBox
-          opacity: gearOpacity,
-          scale: gearScale,
+          opacity: 1,
+          scale: 1,
         }}
+        ref={gearRef}
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={appeared ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
       >
         <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
